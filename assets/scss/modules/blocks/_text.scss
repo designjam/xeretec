@@ -1,0 +1,52 @@
+.module-text {
+	background-color: $primary;
+	&__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.inner {
+		color: white;
+		p, ul, ol, li {
+            font-weight: $font-regular;
+        }
+	}
+	.card {
+		box-shadow: 6px 6px 14px rgba(84,19,136, 1);
+	}
+
+
+	&--full {
+		.margin--basemobile {
+			margin-bottom: 0;
+		}
+		@include media-breakpoint-between(xs,md) {
+			.inner {
+				margin-top: 2.4rem;
+			}
+			.btn {
+				display: none;
+				&--mobile {
+					display: inline-flex;
+				}
+			}
+		}
+	}
+
+	&--right {
+		@include media-breakpoint-between(xs,md) {
+			.module-text__background {
+				transform: rotate(180deg);
+			}
+		}
+
+		.module-text__row {
+			.module-text__row {
+				flex-direction: row-reverse;
+			}
+		}
+	}
+}

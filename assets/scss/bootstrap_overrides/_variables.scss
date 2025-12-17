@@ -1,0 +1,30 @@
+$font-family: 'Nunito Sans', sans-serif;
+$font-light: 300;
+$font-regular: 400;
+$font-semibold: 600;
+$font-bold: 700;
+$font-extrabold: 800;
+
+$primary: #191D32;
+$secondary: #E51728;
+$tertiary: #541388;
+$primary-gray: #F2F2F3;
+$secondary-gray: #6A6A6A;
+
+// BOOTSTRAP GRID
+$grid-breakpoints: (
+  xs: 0,
+  sm: 480px,
+  md: 768px,
+  lg: 1350px,
+  xl: 1540px,
+  xxl: 1820px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 95vw,
+  lg: 1296px,
+  xl: 1480px,
+  xxl: 1770px
+);

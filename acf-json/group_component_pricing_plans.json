@@ -1,0 +1,140 @@
+{
+    "key": "group_component_pricing_plans",
+    "title": "Component: Pricing Plans",
+    "fields": [
+        {
+            "key": "field_pricing_plans_content",
+            "label": "Content",
+            "name": "content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_pricing_plans",
+            "label": "Plans",
+            "name": "plans",
+            "type": "repeater",
+            "required": 0,
+            "min": 1,
+            "layout": "block",
+            "button_label": "Add Plan",
+            "sub_fields": [
+                {
+                    "key": "field_plan_name",
+                    "label": "Plan Name",
+                    "name": "name",
+                    "type": "text",
+                    "required": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_plan_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "required": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_plan_features",
+                    "label": "Features",
+                    "name": "features",
+                    "type": "repeater",
+                    "required": 0,
+                    "layout": "block",
+                    "button_label": "Add Feature",
+                    "sub_fields": [
+                        {
+                            "key": "field_plan_feature_text",
+                            "label": "Feature Text",
+                            "name": "text",
+                            "type": "text",
+                            "required": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            }
+                        }
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_plan_cta",
+                    "label": "CTA Button",
+                    "name": "cta",
+                    "type": "link",
+                    "return_format": "array",
+                    "required": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                },
+                {
+                    "key": "field_plan_highlight",
+                    "label": "Highlight Plan",
+                    "name": "highlight",
+                    "type": "true_false",
+                    "default_value": 0,
+                    "ui": 1,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    }
+                }
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-component-library.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Pricing Plans component fields - cloned into flexible content",
+    "show_in_rest": 0,
+    "modified": 1764003444
+}

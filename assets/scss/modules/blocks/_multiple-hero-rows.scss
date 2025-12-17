@@ -1,0 +1,23 @@
+.module-multiple-hero-rows {
+	&__col {
+		margin-bottom: 3rem;
+		@media (min-width: 768px) and (max-width: 1100px) {
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+	}
+
+	.card--illustration {
+		padding-bottom: 18rem;
+	}
+
+	// FIXED RATIO
+	.card__illustration-image {
+		width: 140px;
+    	height: 140px;
+    	@include media-breakpoint-between(xs,sm) {
+    		width: 120px;
+    		height: 120px;
+    	}
+	}
+}

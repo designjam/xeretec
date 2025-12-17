@@ -1,0 +1,151 @@
+//******************************************************************************
+// HEADER
+//******************************************************************************
+.site-header {
+	width: 100%;
+	z-index: 15;
+    position: relative;
+    color: white;
+
+    // SEARCH
+    .site-search {
+	    .search-toggle {
+	        background: url(../assets/images/search-white.svg) no-repeat top 2px center;
+	        &:after {
+	            background: white;
+	        }
+	        @media (max-width: 1100px) {
+	        	background: url(../assets/images/search-white.svg) no-repeat top 10px center;
+	        	&:after {
+	        		display: none;
+	        	}
+        	}
+	    }
+	    .search-form-container {
+	        input[type="text"] {
+	            border: 1px solid white;
+	            background: white url('../assets/images/btn-primary.svg') no-repeat right 15px center;
+	            background-size: 30px;
+	        }
+	    }
+	}
+
+	// TOP LEVELNAVIGATION
+    .main-nav {
+	    .navbar {
+	        #primary-navigation {
+	            .navbar--primary {
+	                border-bottom: 1px solid white;
+	                .menu-item {
+	                    &.menu-item--level-0 {
+	                        > a {                  
+	                            color: white;
+	                            &:after {
+	                                background: white;
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }
+	}
+
+    &--dark {
+    	color: $primary;
+
+    	#primary-navigation-mobile-toggle {
+		    .primary-navigation-mobile-icon {
+		        background: $primary;
+		        &:before,
+		        &:after {
+		            background: $primary;
+		        }
+		    }
+		}
+
+    	// SEARCH
+	    .site-search {
+			.search-toggle {
+		        background: url(../assets/images/search-primary.svg) no-repeat top 2px center;
+		        &:after {
+		            background:  $primary;
+		        }
+		        @media (max-width: 1100px) {
+		        	background: url(../assets/images/search-primary.svg) no-repeat top 10px center;
+		        	&:after {
+		        		display: none;
+		        	}
+	        	}
+		    }
+		    .search-form-container {
+		        input[type="text"] {
+		            color: $primary;
+		            border: 1px solid $primary;
+		            background: $primary-gray url('../assets/images/btn-primary.svg') no-repeat right 15px center;
+		            background-size: 30px;
+		        }
+		    }
+		}
+	
+    	// TOP LEVELNAVIGATION
+    	.main-nav {
+		    .navbar {
+		        #primary-navigation {
+		            .navbar--primary {
+		                border-bottom: 1px solid $primary;
+		                .menu-item {
+		                    // TOP LEVEL NAVIGATION
+		                    &.menu-item--level-0 {
+		                        > a {                  
+		                            color: $primary;
+		                            &:after {
+		                                background: $primary;
+		                            }
+		                        }
+		                    }
+		                }
+		            }
+		        }
+		    }
+		}
+    }
+    
+    // IMPORTANT TO ACCOMODATE THE HERO MODULE END
+
+	.navbar {
+		padding: 0 1.5rem;
+		.navbar-brand {
+			padding: 0;
+			margin: -2rem 0 0 0;
+			@media (max-width: 1100px) {
+				margin: -2rem auto 0 0;
+			}
+			.logo {
+				width: 180px;
+			}
+		}
+	}
+
+	// TABLET
+    @include media-breakpoint-only(lg) {
+        .navbar {
+			.navbar-brand {
+				svg {
+					width: 150px;
+				}
+			}
+		}
+    }
+
+	// MOBILE
+    @include media-breakpoint-between(xs, md) {
+		.navbar {
+			.navbar-brand {
+				svg {
+					width: 100px;
+				}
+			}
+		}
+	}
+}

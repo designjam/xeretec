@@ -1,0 +1,67 @@
+.module-quick-links {
+	background-color: $primary;
+
+	&__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__col {
+		margin-bottom: 3rem;
+		@media(max-width: 1100px) {
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+		@include media-breakpoint-between(xs,sm) {
+			flex: 0 0 100%;
+    		max-width: 100%;
+		}
+	}
+
+	.card {
+		box-shadow: 6px 6px 14px rgba(84,19,136, 1);
+	}
+
+	.card--illustration {
+		padding-bottom: 18rem;
+		@include media-breakpoint-only(xl) {
+    		padding-bottom: 14rem;
+    	}
+	}
+
+	// FIXED RATIO
+	.card__illustration-image {
+		width: 140px;
+    	height: 140px;
+    	@include media-breakpoint-only(xl) {
+    		width: 100px;
+    		height: 100px;
+    	}
+	}
+
+	.card--illustration-left {
+		.card__illustration-image {
+			width: 120px;
+	    	height: 120px;
+
+	    	@include media-breakpoint-only(xl) {
+	    		width: 100px;
+	    		height: 100px;
+	    	}
+		}
+	}
+
+	.inner {
+		color: white;
+	}
+
+	&--right {
+		.module-quick-links__col {
+			// display: none;
+
+		}
+	}
+}

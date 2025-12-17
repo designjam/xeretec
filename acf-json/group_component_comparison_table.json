@@ -1,0 +1,250 @@
+{
+    "key": "group_component_comparison_table",
+    "title": "Component: Comparison Table",
+    "fields": [
+        {
+            "key": "field_comparison_table_content",
+            "label": "Content",
+            "name": "content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_comparison_products",
+            "label": "Products",
+            "name": "products",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add the products to compare in the table",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Product",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_product_name",
+                    "label": "Product Name",
+                    "name": "product_name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_view_product_link",
+                    "label": "View Product Link",
+                    "name": "view_product_link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                }
+            ]
+        },
+        {
+            "key": "field_comparison_features",
+            "label": "Features",
+            "name": "features",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add features to compare across products",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Feature",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_feature_name",
+                    "label": "Feature Name",
+                    "name": "feature_name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_product_availability",
+                    "label": "Product Availability",
+                    "name": "product_availability",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "Add one row per product. Match the order of products above. Use Product Index: 1 for first product, 2 for second, etc.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "table",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Add Product Availability",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_product_index",
+                            "label": "Product Index",
+                            "name": "product_index",
+                            "aria-label": "",
+                            "type": "number",
+                            "instructions": "Enter the product number (1, 2, 3, etc.) matching the order in Products above",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 1,
+                            "min": 1,
+                            "max": "",
+                            "placeholder": "",
+                            "step": 1,
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_available",
+                            "label": "Available",
+                            "name": "available",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "Check if this feature is available for this product",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_693eb66a0b156",
+            "label": "Primary CTA",
+            "name": "primary_cta",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 1
+        },
+        {
+            "key": "field_comparison_cta",
+            "label": "Secondary CTA",
+            "name": "secondary_cta",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "default"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Comparison Table component fields - cloned into flexible content",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1765717640
+}

@@ -1,0 +1,70 @@
+{
+    "key": "group_component_download_banner",
+    "title": "Component: Download Banner",
+    "fields": [
+        {
+            "key": "field_download_banner_content",
+            "label": "Content",
+            "name": "content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_download_image",
+            "label": "Image",
+            "name": "image",
+            "type": "image",
+            "return_format": "array",
+            "required": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "key": "field_download_cta",
+            "label": "Download CTA",
+            "name": "download_cta",
+            "type": "link",
+            "return_format": "array",
+            "required": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-component-library.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Download Banner component fields - cloned into flexible content",
+    "show_in_rest": 0,
+    "modified": 1764003444
+}

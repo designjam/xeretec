@@ -1,0 +1,200 @@
+ //******************************************************************************
+// TYPOGRAPHY
+//******************************************************************************
+
+h1,h2,h3,h4,h5,h6, .alpha, .beta, .gamma, .delta, .epsilon, .zeta {
+	font-family: $font-family;
+	font-weight: $font-extrabold;
+	margin-bottom: 0;
+
+
+	&--light {
+		font-weight: $font-light;
+	}
+	&--regular {
+		font-weight: $font-regular;
+	}
+	&--semibold {
+		font-weight: $font-semibold;
+	}
+	&--bold {
+		font-weight: $font-bold;
+	}
+	&--extrabold {
+		font-weight: $font-extrabold;
+	}
+	&--center {
+		margin: auto;
+    	width: fit-content;
+
+    	@include media-breakpoint-between(xs,sm) {
+    		margin: 0;
+    	}
+	}
+	&--uppercase {
+		position: relative;
+		text-transform: uppercase;
+		padding-left: 2rem;
+		&:before {
+		    position: absolute;
+		    // top: 4px;
+		    content: '';
+		    width: 2px;
+		    // height: calc(100% - 10px);
+		    background: $secondary;
+		    left: 0;
+		}
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+		&:hover {
+			color: $secondary;
+			text-decoration: none;
+		}
+	}
+	span {
+		&:first-child{
+			display: block;
+			color: $secondary;
+		}
+		
+	}
+}
+
+.small {
+	font-size: 13px;
+}
+
+.color {
+	&--primary {
+		color: $primary;
+	}
+	&--secondary {
+		color: $secondary;
+	}
+	&--tertiary {
+		color: $tertiary;
+	}
+}
+
+h1, .alpha {
+	@include fluid-type(55px, 83px);
+	line-height: 1;
+	&:before {
+		top: 12px;
+    	height: calc(100% - 26px);
+	}
+
+	@include media-breakpoint-between(xs,sm) {
+		&:before {
+			top: 7px;
+    		height: calc(100% - 15px);
+		}
+	}
+}
+h2, .beta {
+	@include fluid-type(41px, 65px);
+	line-height: 1.1;
+	&:before {
+	    top: 10px;
+	    height: calc(100% - 24px);
+	}
+
+	@include media-breakpoint-between(lg,xl) {
+		font-size: 55px;
+	}
+
+	@include media-breakpoint-between(xs,sm) {
+		&:before {
+			top: 7px;
+    		height: calc(100% - 16px);
+		}
+	}
+}
+h3, .gamma {
+	@include fluid-type(30px, 60px);
+	line-height: 1.1;
+}
+h4, .delta {
+	@include fluid-type(24px, 37px);
+	line-height: 1.1;
+	max-width: 500px;
+	&:before {
+		top: 7px;
+    	height: calc(100% - 14px);
+   	}
+
+   	@include media-breakpoint-between(xs,sm) {
+		&:before {
+    		top: 4px;
+    		height: calc(100% - 7px);
+		}
+	}
+}
+h5, .epsilon {
+	@include fluid-type(20px, 30px);
+	line-height: 1.1;
+	&:before {
+		top: 5px;
+    	height: calc(100% - 11px);
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+		&:before {
+    		top: 2px;
+    		height: calc(100% - 6px);
+		}
+	}
+}
+h6, .zeta {
+	@include fluid-type(20px, 24px);
+	line-height: 1.3;
+	&:before {
+		top: 4px;
+    	height: calc(100% - 7px);
+    }
+}
+
+.pre-header {
+	display: block;
+	font-weight: 700;
+
+	.pb & {
+		color: #7B7B7B;
+	}
+}
+
+blockquote {
+	@include fluid-type(19px, 28px);
+	font-weight: $font-semibold;
+	line-height: 1.3;
+	p {
+		margin: 0;
+		line-height: 1.3;
+	}
+	em {
+		font-size: 16px;
+		display: block;
+		margin-top: 1.5rem;
+		font-weight: $font-semibold;
+	}
+}
+
+.keyline-wrapper{
+	position: relative;
+	&:before {
+		position: absolute;
+		top: 10px;
+		content: '';
+		width: 2px;
+		height: calc(100% - 24px);
+		background: $secondary;
+		left: 0;
+	}
+	.left-animation{
+		&:before{
+			content: none;
+		}
+	}
+}

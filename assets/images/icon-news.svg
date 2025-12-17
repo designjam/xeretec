@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="Group_19798" data-name="Group 19798" transform="translate(21262 18462)">
+    <g id="Rectangle_7705" data-name="Rectangle 7705" transform="translate(-21257 -18453)" fill="none" stroke="#fff" stroke-width="0.8">
+      <rect width="50" height="42" rx="10" stroke="none"/>
+      <rect x="0.4" y="0.4" width="49.2" height="41.2" rx="9.6" fill="none"/>
+    </g>
+    <g id="Group_19792" data-name="Group 19792" transform="translate(-21243 -18443)">
+      <g id="Group_3710" data-name="Group 3710">
+        <path id="Path_8330" data-name="Path 8330" d="M19.233,6.622h2.431A1.849,1.849,0,0,1,23.487,8.5V20.051a2.128,2.128,0,1,1-4.254,0V2.874A1.849,1.849,0,0,0,17.409,1H2.823A1.849,1.849,0,0,0,1,2.874v17.49a1.849,1.849,0,0,0,1.823,1.874H21.056" transform="translate(-1 -1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="0.8"/>
+      </g>
+      <g id="Group_3720" data-name="Group 3720" transform="translate(3.151 4.863)">
+        <line id="Line_24" data-name="Line 24" x2="11.243" transform="translate(0 3.748)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="0.8"/>
+        <line id="Line_25" data-name="Line 25" x2="11.243" transform="translate(0 7.496)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="0.8"/>
+        <line id="Line_26" data-name="Line 26" x2="6.246" transform="translate(0 11.243)" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="0.8"/>
+        <line id="Line_33" data-name="Line 33" x2="11.243" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="0.8"/>
+      </g>
+    </g>
+    <rect id="Rectangle_7709" data-name="Rectangle 7709" width="60" height="60" transform="translate(-21262 -18462)" fill="none"/>
+  </g>
+</svg>

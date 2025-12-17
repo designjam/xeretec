@@ -1,0 +1,54 @@
+{
+    "key": "group_62680a2a0ca5a",
+    "title": "Related Case Studies (38)",
+    "fields": [
+        {
+            "key": "field_62680a6fd96b5",
+            "label": "Related Case Studies",
+            "name": "rel_related_casestudies",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "case_studies",
+                "testimonials"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "object",
+            "min": "",
+            "max": "",
+            "elements": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "user_role",
+                "operator": "==",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1675691239
+}

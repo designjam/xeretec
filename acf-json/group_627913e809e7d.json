@@ -1,0 +1,174 @@
+{
+    "key": "group_627913e809e7d",
+    "title": "Hero",
+    "fields": [
+        {
+            "key": "field_627917f5d0526",
+            "label": "Type",
+            "name": "fld_hero_type",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "large": "Large",
+                "small": "Small"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_627914651924e",
+            "label": "Headline",
+            "name": "fld_hero_headline",
+            "type": "text",
+            "instructions": "Add ** either side of the text you wish to highlight. **example**",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_627914ce4f59c",
+            "label": "Excerpt",
+            "name": "fld_hero_excerpt",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627917f5d0526",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_627914f30b2d1",
+            "label": "Background",
+            "name": "img_hero_background",
+            "type": "image",
+            "instructions": "Large - Please ensure the image size is 1920px x 780px and 72dpi<br>\r\nSmall - Please ensure the image size is 1920px x 520px and 72dpi",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627917f5d0526",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_6279156836254",
+            "label": "Link",
+            "name": "fld_hero_link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627917f5d0526",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_6279158636255",
+            "label": "Anchor",
+            "name": "fld_hero_anchor",
+            "type": "link",
+            "instructions": "Please enter a hash tag, followed by the title of the module, for example: #the-title-of-the-module",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627917f5d0526",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "user_role",
+                "operator": "==",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1653377932
+}

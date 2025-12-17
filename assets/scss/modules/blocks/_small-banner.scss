@@ -1,0 +1,67 @@
+.module-small-banner {
+	padding: 0;
+	max-height: 600px;
+	overflow: hidden;
+
+	@media(max-width: 1100px) {
+		max-height: unset;
+		overflow: unset;
+	}
+
+	&__background {
+		@media(max-width: 1100px) {
+			max-height: 300px;
+			overflow: hidden;
+		}
+
+		// @include media-breakpoint-between(xs,md) {
+		// 	max-height: 300px;
+		// 	overflow: hidden;
+		// }
+	}
+
+	.inner {
+		color: white;
+		padding: 8.5rem 7.5rem;
+		height: 100%;
+		background: $primary url(../assets/images/background-full.png) no-repeat center;
+		p, ul, ol, li {
+            font-weight: $font-regular;
+        }
+
+		@include media-breakpoint-between(md,lg) {
+			padding: 5.5rem;
+		}
+
+		@include media-breakpoint-between(xs,sm) {
+			padding: 3.6rem;
+		}
+
+	}
+
+	div[class*='col-'] {
+		@media(max-width: 1100px) {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+	}
+
+	&--right {
+		.module-small-banner__row {
+			.module-small-banner__row {
+				flex-direction: row-reverse;
+			}
+		}
+	}
+
+	// @media(max-width: 768px) {
+	// 	max-height: unset;
+	// 	&__background {
+	// 		max-height: 250px;
+	// 	}
+	// 	&__col {
+	// 		flex: 0 0 100%;
+ //    		max-width: 100%;
+	// 	}
+	// }
+}

@@ -1,0 +1,50 @@
+.module-features {
+	background-color: $primary;
+
+	&__col {
+	    margin-bottom: 3rem;
+	    @media(max-width: 1100px) {
+			flex: 0 0 50%;
+			max-width: 50%;
+		}
+		@include media-breakpoint-between(xs,sm) {
+			flex: 0 0 100%;
+    		max-width: 100%;
+		}
+	}
+
+	.inner {
+		color: white;
+		margin-top: 14rem;
+		@include media-breakpoint-between(xs,md) {
+			margin-top: 0;
+		}
+	}
+
+	// FIXED RATIO
+	.card__illustration-image {
+		width: 120px;
+    	height: 120px;
+	}
+
+	.card {
+		padding-top: 14rem;
+		font-weight: $font-regular;
+		@include media-breakpoint-between(xs,sm) {
+			padding-top: 12rem;
+		}
+	}
+
+	.card__inner {
+		padding: 0 2.5rem 2.5rem 2.5rem;
+
+		@include media-breakpoint-only(md) {
+			padding: 2.5rem 2.5rem 0 0;
+		}
+
+		@include media-breakpoint-between(xs,sm) {
+			padding: 2.5rem 0 0 0;
+		}
+
+	}
+}

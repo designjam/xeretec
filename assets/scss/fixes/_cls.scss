@@ -1,0 +1,14 @@
+main {
+    min-height: 500px;
+}
+
+section.module-hero div.module-hero__video::before {
+    content: '';
+    position: absolute; /* or relative depending on your design */
+    width: 100%;
+    height: 100%;
+}
+
+.module-services {
+    min-height: 300px;  /* An estimate, adjust based on your content */
+}

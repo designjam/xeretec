@@ -1,0 +1,255 @@
+{
+    "key": "group_626a9c78db075",
+    "title": "Form (26 & 41)",
+    "fields": [
+        {
+            "key": "field_626a9cfe0494a",
+            "label": "Type",
+            "name": "fld_form_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "hubspot": "HubSpot",
+                "standard": "Standard",
+                "gated": "Gated",
+                "ondemand": "On-Demand"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_626a9c78e77ff",
+            "label": "Headline",
+            "name": "fld_form_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Add ** either side of the text you wish to highlight. **example**",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_626a9ca204948",
+            "label": "Excerpt",
+            "name": "fld_form_excerpt",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_626a9c78e7846",
+            "label": "Text",
+            "name": "fld_form_text",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_6283c4093c50b",
+            "label": "Gated Content",
+            "name": "fld_form_gated",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Note: This is a URL to the gated file",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_626a9cfe0494a",
+                        "operator": "==",
+                        "value": "gated"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_62c2d5936693d",
+            "label": "On-Demand Content",
+            "name": "fld_form_ondemand",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Note: This is a URL to the on-demand URL",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_626a9cfe0494a",
+                        "operator": "==",
+                        "value": "ondemand"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_626a9ce704949",
+            "label": "Form ID",
+            "name": "fld_form_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_626a9cfe0494a",
+                        "operator": "==",
+                        "value": "standard"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66c31ae8d422c",
+            "label": "HubSpot Code",
+            "name": "fld_form_hubspot",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_626a9cfe0494a",
+                        "operator": "==",
+                        "value": "hubspot"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_626a9c78e78be",
+            "label": "Background (Optional)",
+            "name": "img_form_background",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Please ensure the image size is 1920px x 980px and 72dpi",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "user_role",
+                "operator": "==",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1744890967
+}

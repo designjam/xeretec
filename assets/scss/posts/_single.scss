@@ -1,0 +1,84 @@
+
+.single {
+	blockquote {
+		display: flex;
+		align-items: center;
+		p {
+			@include fluid-type(19px, 28px);
+			font-weight: $font-semibold;
+			display: flex;
+			align-items: center;
+			@include media-breakpoint-between(xs,sm) {
+				display: block;
+				text-align: center;
+				line-height: 1.2;
+			}
+		}
+		@include media-breakpoint-between(xs,sm) {
+			display: block;
+			text-align: center;
+			line-height: 1.2;
+		}	
+	}
+
+	&__row {
+		.inner {
+			// margin-bottom: 10rem;
+			// @include media-breakpoint-between(xs,lg) {
+			// 	margin-bottom: 3.6rem;
+			// }
+			img {
+				// @extend .img-fluid;
+				max-width: 100%;
+				&.size-full {
+					width: 100%;
+				}
+				&.alignleft,
+				&.alignright {
+					display: block;
+				}
+				&.alignleft {
+					float: left;
+					margin-right: 3rem;
+					@include media-breakpoint-between(xs,sm) {
+						margin: 0 auto 3rem auto;
+					}
+				}
+				&.alignright {
+					float: right;
+					margin-left: 3rem;
+					@include media-breakpoint-between(xs,sm) {
+						margin: 0 auto 3rem auto;
+					}
+				}
+			}
+		}
+	}
+
+
+	&__video {
+		margin-top: 3.5rem;
+		@include media-breakpoint-between(xs,lg) {
+			margin-bottom: 3.6rem;
+		}
+	}
+
+	&__share {
+		position: -webkit-sticky;
+	    position: sticky;
+	    top: 0;
+	    .share {
+	    	width: 100%;
+	    }
+	    @include media-breakpoint-between(xs,lg) {
+	    	margin-top: 5rem;
+			margin-bottom: 5rem;
+		}
+	}
+
+	@include media-breakpoint-between(xs,lg) {
+		&__row {
+			flex-direction: column-reverse;
+		}
+	}
+}

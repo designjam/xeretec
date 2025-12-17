@@ -1,0 +1,105 @@
+//******************************************************************************
+// FOOTER
+//******************************************************************************
+
+.footer {
+	position: relative;
+	padding: 5rem 0;
+	background-color: $primary;
+	color: white;
+
+	&__row {
+		display: flex;
+    	align-items: center;
+
+		&:last-of-type {
+			margin-top: 7rem;
+		}
+		@include media-breakpoint-between(xs, md) {
+			align-items: flex-start;
+		}
+	}
+
+	&__brand {
+		padding: 0;
+		margin: 0;
+		.logo {
+			width: 180px;
+
+			@include media-breakpoint-between(xs, md) {
+				width: 156px;
+			}
+		}
+	}
+
+	&__legal,
+	&__rouge {
+		font-weight: $font-semibold;
+	}
+
+	&__rouge {
+		color: white;
+		text-decoration: none;
+		&:hover {
+			color: $secondary;
+		}
+
+		@include media-breakpoint-between(xs, md) {
+    		display: block;
+			margin-top: 1rem;
+		}
+	}
+
+	&__legal {
+		display: inline-flex;
+		.menu {
+			&-item {
+				display: inline-flex;
+			}
+		}
+
+		@include media-breakpoint-between(xs, sm) {
+			display: block;	
+		}
+	}
+
+	.menu {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		&-item {
+			margin-bottom: 1rem;
+			a {
+				font-weight: $font-semibold;
+				color: white;
+				text-decoration: none;
+				&:hover {
+					color: $secondary;
+				}
+			}
+		}
+	}
+
+	.navbar {
+		&--primary {
+			@include media-breakpoint-between(xs, md) {
+				display: flex;
+				align-items: flex-end;
+			}
+		}
+		&--secondary {
+			.menu-item {
+				margin-bottom: 0;
+				&:after {
+					content: '|';
+					margin: 0 1rem;
+				}
+				&:last-of-type {
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

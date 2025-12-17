@@ -1,0 +1,70 @@
+.module-large-banner {
+	padding: 0;
+	max-height: 800px;
+	overflow: hidden;
+
+	@media(max-width: 1100px) {
+		max-height: unset;
+		overflow: unset;
+	}
+
+	&__background {
+		@media(max-width: 1100px) {
+			max-height: 300px;
+			overflow: hidden;
+		}
+
+		// @include media-breakpoint-between(xs,md) {
+		// 	max-height: 300px;
+		// 	overflow: hidden;
+		// }
+	}
+
+	&__row {
+		@media(max-width: 1100px) {
+			flex-direction: column-reverse;
+		}
+	}
+
+	.inner {
+		background-color: $primary;
+		color: white;
+		padding: 13rem 15rem;
+		height: 100%;
+		background: $primary url(../assets/images/background-half-right.png) no-repeat right center;
+		p, ul, ol, li {
+            font-weight: $font-regular;
+        }
+
+		@include media-breakpoint-only(xl) {
+			padding: 10rem;
+		}
+
+		@include media-breakpoint-between(md,lg) {
+			padding: 5rem;
+		}
+
+		@include media-breakpoint-between(xs,sm) {
+			padding: 3.6rem;
+		}
+	}
+
+	div[class*='col-'] {
+		@media(max-width: 1100px) {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+	}
+
+	&--right {
+		.module-large-banner__row {
+			flex-direction: row-reverse;
+			@media(max-width: 1100px) {
+				flex-direction: column-reverse;
+			}
+		}
+		.inner {
+			background: $primary url(../assets/images/background-half-left.png) no-repeat left center;
+		}
+	}
+}

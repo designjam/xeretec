@@ -1,0 +1,304 @@
+{
+    "key": "group_627bd24a8580f",
+    "title": "Hero (Homepage)",
+    "fields": [
+        {
+            "key": "field_627bd24a994a8",
+            "label": "Headline",
+            "name": "fld_hero_video_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Add ** either side of the text you wish to highlight. **example**",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_627bd24a994e4",
+            "label": "Excerpt",
+            "name": "fld_hero_video_excerpt",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_627bd24a99582",
+            "label": "Link",
+            "name": "fld_hero_video_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_662f6af04271f",
+            "label": "Background",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "If image or video are not populated, a default background video will be shown in its place.\r\n\r\nExample Vimeo URL: https:\/\/player.vimeo.com\/progressive_redirect\/playback\/725965612\/rendition\/1080p\/file.mp4?loc=external&signature=e25b55ddf940d60e97c6b816a4563438cb7cdd8c5252d5e6ee1b8984753b0ea9",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_627bd24a9951f",
+            "label": "Image",
+            "name": "img_hero_video_background",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_662f6584ece0f",
+            "label": "Video",
+            "name": "img_hero_videourl_background",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Vimeo URL",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_662f6f6605c67",
+            "label": "Theme",
+            "name": "img_hero_theme_background",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "purple-red": "Purple\/Red",
+                "purple-blue": "Purple\/Blue",
+                "purple-pink": "Purple\/Pink"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_627bd27c58979",
+            "label": "Modal Video",
+            "name": "fld_hero_video_embed",
+            "aria-label": "",
+            "type": "oembed",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "width": "",
+            "height": ""
+        },
+        {
+            "key": "field_627bd2e5d7889",
+            "label": "Modal Link Text",
+            "name": "fld_hero_video_embed_link",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_62bec6c0f16f0",
+            "label": "Link",
+            "name": "fld_hero_video_link2",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_627bd24a995c5",
+            "label": "Anchor",
+            "name": "fld_hero_video_anchor",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Please enter a hash tag, followed by the title of the module, for example: #the-title-of-the-module",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_627bd24a994a8",
+                        "operator": "!=",
+                        "value": "default"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "user_role",
+                "operator": "==",
+                "value": "all"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1718029073
+}

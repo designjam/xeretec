@@ -1,0 +1,90 @@
+{
+    "key": "group_component_contact_form",
+    "title": "Component: Contact Form",
+    "fields": [
+        {
+            "key": "field_contact_form_content",
+            "label": "Content",
+            "name": "content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_contact_form_shortcode",
+            "label": "Hubspot Code",
+            "name": "hubspot_code",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "<script charset=\"utf-8\" type=\"text\/javascript\" src=\"\/\/js-eu1.hsforms.net\/forms\/embed\/v2.js\"><\/script>\r\n<script>\r\n  hbspt.forms.create({\r\n    portalId: \"139694148\",\r\n    formId: \"f7cc2276-4e43-4b46-999c-de892b3e87f8\",\r\n    region: \"eu1\"\r\n  });\r\n<\/script>",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_692ecd0395cd9",
+            "label": "Formidable Form ID",
+            "name": "formidable_form_id",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "default"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Contact Form component fields - cloned into flexible content",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1764674860
+}

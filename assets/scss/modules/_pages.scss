@@ -1,0 +1,75 @@
+//******************************************************************************
+// PAGES
+// Common styles shared by multiple pages
+// Unless you're working on very large site or application, most of the
+// page-specific code should go in here.
+//******************************************************************************
+
+.post-type-archive-case_studies {
+	.card__logo {
+		height: auto;
+		img {
+		    // height: 100px; // CASE STUDY LOGOS REQUIRED TO BE 100PX H
+		    -o-object-fit: contain;
+		    object-fit: contain;
+		}
+	}
+}
+.post-type-archive-partners {
+	.card__logo {
+		img {
+			height: 100px;
+    		width: auto;
+		}
+	}
+}
+.post-type-archive-case_studies,
+.blog,
+.post-type-archive-partners {
+	.page-listing {
+		margin-bottom: 10rem;
+	}
+}
+.search-results {
+	.page-search {
+		margin-top: 7rem;
+		margin-bottom: 10rem;
+	}
+}
+.page-template-template-default-tv {
+	.page-default {
+		margin-bottom: 10rem;
+
+		.inner {
+			img {
+				max-width: 100%;
+				&.size-full {
+					width: 100%;
+				}
+				&.alignleft,
+				&.alignright {
+					display: block;
+				}
+				&.alignleft {
+					float: left;
+					margin-right: 3rem;
+					@include media-breakpoint-between(xs,sm) {
+						margin: 0 auto 3rem auto;
+					}
+				}
+				&.alignright {
+					float: right;
+					margin-left: 3rem;
+					@include media-breakpoint-between(xs,sm) {
+						margin: 0 auto 3rem auto;
+					}
+				}
+			}
+		}
+	}
+}
+.page-template-template-team-td {
+	main {
+		padding-bottom: 10rem;
+	}
+}
