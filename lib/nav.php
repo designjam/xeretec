@@ -221,10 +221,10 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			if ($depth == 1 && $featured) {
 				$output .= '<div class="featured">';
 
-				if (!empty($featured['image']['src'])) {
-					$output .= '<div class="image"><img src="' . $featured['image']['src'] . '" alt="' . $featured['image']['alt'] . '" /></div>';
-					// $output .= '<div class="image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Test.svg/960px-Test.svg.png?20251228222034" alt="' . $featured['image']['alt'] . '" /></div>';
-				}
+				// if (!empty($featured['image']['src'])) {
+					// $output .= '<div class="image"><img src="' . $featured['image']['src'] . '" alt="' . $featured['image']['alt'] . '" /></div>';
+					$output .= '<div class="image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Test.svg/960px-Test.svg.png?20251228222034" alt="Test" /></div>';
+				// }
 				if (!empty($featured['title'])) {
 					$output .= '<div class="title">' . $featured['title'] . '</div>';
 				}
@@ -428,7 +428,7 @@ html.site-header--open {
 	width: calc(100% - 423px);
 	display: flex;
   flex-flow: column wrap;
-  height: 84vh;
+  height: 80vh;
 }
 
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .nav-container {
@@ -497,5 +497,9 @@ html.site-header--open {
 
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu .dropdown-menu.v2-menu .menu-item {
 	width: auto;
+}
+
+#primary-navigation-mobile-toggle {
+	height: 30px;
 }
 </style>

@@ -7,7 +7,7 @@
 
 <header class="site-header<?php if (is_404() || is_search() || is_page_template('template-default-tv.php') || is_page_template('template-career.php') || is_page_template('sitemap.php')): echo " site-header--dark"; endif; ?>">
     <div id="skiplink-container">
-        <div class="container"> 
+        <div class="container">
             <a href="#content" class="skiplink">Skip to main content</a>
         </div>
     </div>
@@ -25,7 +25,7 @@
                         <?php endif; ?>
                     </a>
 
-                    <div class="collapse navbar-collapse justify-content-end" id="primary-navigation">
+                    <div class="collapse navbar-collapse justify-content-center" id="primary-navigation">
                         <div class="backdrop"></div>
                         <div class="primary-navigation--outer">
                             <div class="container container--primary-navigation">
@@ -42,14 +42,14 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="site-search site-search--closed">
                         <button class="search-toggle" aria-label="Search the website"></button>
                         <div class="search-form-container">
                             <?php get_search_form();?>
                         </div>
                     </div>
-       
+
                     <button id="primary-navigation-mobile-toggle" href="#primary-navigation-mobile" aria-label="Open the navigation" aria-controls="primary-navigation-mobile"><span class="primary-navigation-mobile-icon"></span></button>
                     <div class="collapse navbar-collapse justify-content-end" id="primary-navigation-mobile">
                         <?php
@@ -61,7 +61,7 @@
                                 )
                             );
                         ?>
-                    </div>                    
+                    </div>
 
                 </nav>
             </div>
