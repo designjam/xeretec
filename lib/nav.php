@@ -39,16 +39,16 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 */
 
 
-		private $firstItem = true; 
+		private $firstItem = true;
 
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 			$indent  = str_repeat( "\t", $depth );
 
-			$output .= "\n$indent<ul role=\"menu\" class=\"dropdown-menu\" >\n";
+			$output .= "\n$indent<ul role=\"menu\" class=\"dropdown-menu v2-menu depth-$depth\" >\n";
 
 			// ROUGE MEGAMENU OPEN START
 			if (in_array("menu-item--level-0", $args->custom_menu_classes)) {
-				$output .= '<li class="container close-container"><button class="close" role="button"></button></li>';
+				// $output .= '<li class="container close-container"><button class="close" role="button"></button></li>';
 				$output .= '<li class="container nav-container"><ul class="row"><li class="nav-megamenu__menu"><ul>';
 			}
 			// ROUGE MEGAMENU OPEN END
@@ -165,7 +165,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 				$item_output .= ( $args->has_children && 0 === $depth ) ? ' <span class="caret"></span></a>' : '</a>';
 				$item_output .= $args->after;
+
 				$output      .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+
+				// Add extra menu text
+				if ($depth > 1 && get_field('menu_item_text', $item)) {
+					$output .= $indent . '<div class="menu-info">' . get_field('menu_item_text', $item) . '</div>';
+				}
 			} // End if().
 
 			$this->firstItem = false;
@@ -184,7 +190,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// ROUGE MEGAMENU CLOSE START
 			if (in_array("menu-item--level-0", $args->custom_menu_classes)) {
 				$output .= '</ul></li></ul></li>';
-				
+
 				// VARS
 				// $email = get_field('fld_theme_email_us', 'options');
 				// $store = get_field('fld_theme_store', 'options');
@@ -192,16 +198,37 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// $html_email = '<div class="footer__icon"><span>Email Us</span><a href="mailto:' . $email . '" class="social social__email"><span class="screen-reader-text">Email Us</span></a></div>';
 				// $html_store = '<div class="footer__icon"><span>Visit Supplies Store</span><a href="' . $store . '" class="social social__store"><span class="screen-reader-text">Visit Supplies Store</span></a></div>';
 
-				$social = '<li class="container social-container"></li>';
-
-				$output .= $social;
+				// $social = '<li class="container social-container"></li>';
+				//
+				// $output .= $social;
 
 				// $output .= $html_title . $html_description . $html_url;
-				
+
 			}
 			// ROUGE MEGAMENU CLOSE END
 
+
+			// Add right hand column
+			$output .= $args->menu->term_id;
+			$featured = get_field('featured_menu', 'menu_item_' . $args->menu->term_id);
+			if ($depth == 1 && $featured) {
+				$output .= '<div class="featured">';
+
+				if (!empty($featured['image']['src'])) {
+					$output .= '<div class="image"><img src="' . $featured['image']['src'] . '" alt="' . $featured['image']['alt'] . '" /></div>';
+				}
+				if (!empty($featured['title'])) {
+					$output .= '<div class="title">' . $featured['title'] . '</div>';
+				}
+				if (!empty($featured['text'])) {
+					$output .= '<div class="text">' . $featured['text'] . '</div>';
+				}
+				$output .= '</div>';
+			}
+
+
 			$output .= "$indent</ul>{$n}";
+
 
 		}
 
@@ -274,7 +301,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 						$cb_args = array_merge( array(&$output, $depth), $args);
 						$cb_args[2]->custom_menu_classes = $element->classes;
 						// echo "test2";
-						
+
 						call_user_func_array(array($this, 'start_lvl'), array_values($cb_args));
 					}
 					$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
@@ -295,7 +322,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$cb_args['custom_menu_classes'] = $element->classes;
 			// echo "test4";
 			call_user_func_array(array($this, 'end_el'), array_values($cb_args));
-		}		
+		}
 		/**
 		 * Menu Fallback
 		 * =============
@@ -337,3 +364,94 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		}
 	}
 } // End if().
+
+?>
+
+<style>
+html.site-header--open {
+	padding-right: 0 !important;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu {
+	width: 100%;
+	background-color: #FBF7FF;
+	border-radius: 20px;
+	border: 0;
+	margin: 0;
+	padding: 9rem 0 18rem 0;
+	z-index: -1;
+	max-width: 90vw;
+	margin-left: 5vw;
+	max-height: 85vh;
+	top: unset;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-1 > a,
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-2 > a,
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-3 > a {
+	color: #000;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-2 {
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .nav-container {
+	padding: 0 50px;
+	margin: 0;
+	margin-top: -85px;
+	max-width: 100%;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu .dropdown-menu.v2-menu {
+	left: 300px;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu.depth-1 {
+	margin-top: 35px;
+	width: calc(100% - 423px)
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .nav-container {
+	height: 350px;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-2 > a {
+	font-size: 16px;
+	color: #541388;
+	font-weight: 700;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-1 > a.show {
+	background: #EFF0F6;
+	color: #541388;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-1 > a {
+	font-size: 20px;
+	color: #541388;
+	font-weight: 700;
+	padding: 14px;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-1 {
+	margin-bottom: 7px;
+	padding-bottom: 0;
+}
+
+.menu-item-children-toggle span {
+	display: none !important;
+}
+
+.featured {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.menu-info p {
+	color: #575757;
+	font-size: 14px;
+}
+</style>
