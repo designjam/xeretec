@@ -41,6 +41,8 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 		private $firstItem = true;
 
+		private $featuredId;
+
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 			$indent  = str_repeat( "\t", $depth );
 
@@ -172,6 +174,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				if ($depth > 1 && get_field('menu_item_text', $item)) {
 					$output .= $indent . '<div class="menu-info">' . get_field('menu_item_text', $item) . '</div>';
 				}
+
+				// Set the last parent for use in the featured block
+				if ($depth > 1) {
+					$this->featuredId = $item->menu_item_parent;
+				}
 			} // End if().
 
 			$this->firstItem = false;
@@ -209,19 +216,27 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 
 			// Add right hand column
-			$output .= $args->menu->term_id;
-			$featured = get_field('featured_menu', 'menu_item_' . $args->menu->term_id);
+			$featured = get_field('featured_menu', $this->featuredId);
+
 			if ($depth == 1 && $featured) {
 				$output .= '<div class="featured">';
 
 				if (!empty($featured['image']['src'])) {
 					$output .= '<div class="image"><img src="' . $featured['image']['src'] . '" alt="' . $featured['image']['alt'] . '" /></div>';
+					// $output .= '<div class="image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Test.svg/960px-Test.svg.png?20251228222034" alt="' . $featured['image']['alt'] . '" /></div>';
 				}
 				if (!empty($featured['title'])) {
 					$output .= '<div class="title">' . $featured['title'] . '</div>';
 				}
 				if (!empty($featured['text'])) {
 					$output .= '<div class="text">' . $featured['text'] . '</div>';
+				}
+				if (!empty($featured['link'])) {
+					$output .= '<div class="link"><a href="' . $featured['link']['url'] . '">' . $featured['link']['title'] . '
+						<svg width="13" height="13" style="margin-top:-5px" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0.77478 6.198H11.6213M11.6213 6.198L6.19803 0.77475M11.6213 6.198L6.19803 11.6213" stroke="#541388" stroke-width="1.5495" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a></div>';
 				}
 				$output .= '</div>';
 			}
@@ -408,16 +423,20 @@ html.site-header--open {
 	left: 300px;
 }
 
-.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu.depth-1 {
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu.depth-1.show {
 	margin-top: 35px;
-	width: calc(100% - 423px)
+	width: calc(100% - 423px);
+	display: flex;
+  flex-flow: column wrap;
+  height: 84vh;
 }
 
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .nav-container {
-	height: 350px;
+	height: calc(85vh - 50px);
 }
 
-.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-2 > a {
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-2 > a,
+.featured .title p {
 	font-size: 16px;
 	color: #541388;
 	font-weight: 700;
@@ -448,10 +467,35 @@ html.site-header--open {
 	position: absolute;
 	right: 0;
 	top: 0;
+	max-width: 320px;
 }
 
-.menu-info p {
+.featured .image img {
+	max-width: 100%;
+	border-radius: 20px;
+	padding-bottom: 8px;
+}
+
+.menu-info p,
+.featured .text p {
 	color: #575757;
 	font-size: 14px;
+}
+
+.featured .link a {
+	color: #541388;
+	font-size: 15px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-1,
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-2,
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-3 {
+	border: none;
+}
+
+.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu .dropdown-menu.v2-menu .menu-item {
+	width: auto;
 }
 </style>
