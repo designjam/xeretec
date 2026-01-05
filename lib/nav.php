@@ -83,6 +83,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			 * a 0 if the strings are equal.
 			 */
 
+			// Start off with a column wrapper
+			if ($depth > 1 && $this->firstItem) {
+				$output .= '<div class="col-wrap">';
+			}
+
 			if ( 0 === strcasecmp( $item->attr_title, 'divider' ) && 1 === $depth ) {
 				$output .= $indent . '<li role="presentation" class="divider">';
 			} elseif ( 0 === strcasecmp( $item->title, 'divider' ) && 1 === $depth ) {
@@ -110,6 +115,11 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					} else {
 						$class_names .= " nav-megamenu__column";
 					}
+				}
+
+				// Open a new col-wrap column
+				if (get_field('menu_new_column', $item)) {
+					$output .= '</div><div class="col-wrap">';
 				}
 
 				$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
@@ -147,6 +157,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					}
 				}
 				$item_output = $args->before;
+
 				/*
 				 * Glyphicons/Font-Awesome
 				 * ===========
@@ -219,12 +230,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$featured = get_field('featured_menu', $this->featuredId);
 
 			if ($depth == 1 && $featured) {
-				$output .= '<div class="featured">';
+				$output .= '</div><div class="featured">'; // Also closes the col-wrap div
 
 				// if (!empty($featured['image']['src'])) {
+				if (!empty($featured['title'])) {
 					// $output .= '<div class="image"><img src="' . $featured['image']['src'] . '" alt="' . $featured['image']['alt'] . '" /></div>';
 					$output .= '<div class="image"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Test.svg/960px-Test.svg.png?20251228222034" alt="Test" /></div>';
-				// }
+				}
 				if (!empty($featured['title'])) {
 					$output .= '<div class="title">' . $featured['title'] . '</div>';
 				}
@@ -380,7 +392,55 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	}
 } // End if().
 
-?>
+add_action('wp_head', function() {
+	?>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+	jQuery('.dropdown-menu.v2-menu a').on('mouseover', function() {
+		menuHeight();
+	});
+
+	jQuery('a.mega-dropdown-toggle').on('click', function() {
+		checkDropDown(this);
+	});
+});
+
+// Listen for window resizing
+window.addEventListener('resize', function() {
+	menuHeight();
+	checkDropDown();
+}, true);
+
+
+// Update the menu height on hover
+function menuHeight() {
+	setTimeout(function() {
+		let height = jQuery('.dropdown-menu.v2-menu.depth-1.show').height() + 46;
+		console.log(height);
+		jQuery('.dropdown-menu.v2-menu.depth-0').css('height', height + 'px');
+		jQuery('.dropdown-menu.v2-menu.depth-0 .container.nav-container').css('min-height', height + 'px');
+	}, 10);
+}
+
+// Do normal dropdowns for non-mega-menu items
+function checkDropDown(self = window.menuDropdownEl) {
+	window.menuDropdownEl = self; // Set a global var with this to use on resizing the window
+
+	let dropdown = jQuery(self).siblings('ul.dropdown-menu.v2-menu.depth-0');
+	let subMenus = dropdown.find('.dropdown-menu.v2-menu.depth-1').length;
+
+	if (subMenus === 0) {
+		dropdown.css({
+			width: 'auto',
+			padding: '9rem 0 4rem',
+		 	marginLeft: self.offsetLeft - 50 + 'px'
+		});
+	}
+
+	// Reset menu height as well
+	menuHeight();
+}
+</script>
 
 <style>
 html.site-header--open {
@@ -399,6 +459,8 @@ html.site-header--open {
 	margin-left: 5vw;
 	max-height: 85vh;
 	top: unset;
+	height: auto;
+	margin-top: -4px;
 }
 
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-1 > a,
@@ -415,7 +477,8 @@ html.site-header--open {
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .nav-container {
 	padding: 0 50px;
 	margin: 0;
-	margin-top: -85px;
+	/* margin-top: -85px; */
+	margin-top: -55px;
 	max-width: 100%;
 }
 
@@ -424,15 +487,21 @@ html.site-header--open {
 }
 
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu.depth-1.show {
-	margin-top: 35px;
+	margin-top: 25px;
 	width: calc(100% - 423px);
 	display: flex;
-  flex-flow: column wrap;
-  height: 80vh;
+  flex-flow: row;
+  height: auto;
+	gap: 35px;
+	z-index: 1;
+	border-radius: 0;
+	top: -15px;
+	padding: 0;
 }
 
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .nav-container {
-	height: calc(85vh - 50px);
+	/* height: calc(85vh - 50px); */
+	height: auto;
 }
 
 .main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu .menu-item--level-2 > a,
@@ -464,10 +533,12 @@ html.site-header--open {
 }
 
 .featured {
-	position: absolute;
+	position: relative;
 	right: 0;
 	top: 0;
 	max-width: 320px;
+	margin-left: auto;
+	padding-bottom: 35px;
 }
 
 .featured .image img {
@@ -480,6 +551,10 @@ html.site-header--open {
 .featured .text p {
 	color: #575757;
 	font-size: 14px;
+}
+
+.featured .text {
+	margin-bottom: 24px;
 }
 
 .featured .link a {
@@ -502,4 +577,31 @@ html.site-header--open {
 #primary-navigation-mobile-toggle {
 	height: 30px;
 }
+
+.dropdown-menu.v2-menu .col-wrap {
+	display: flex;
+	flex-flow: column wrap;
+	max-width: 220px;
+}
+
+html.site-header--open .main-nav .navbar #primary-navigation .navbar--primary .menu-item.menu-item--level-0.show > a::after {
+	background: #541388;
+	opacity: 1;
+}
+
+@media (max-width: 1159px), (max-height: 550px) {
+	.main-nav .navbar #primary-navigation .navbar--primary .menu-item .dropdown-menu.v2-menu.depth-1.show {
+		flex-direction: column;
+		gap: 0;
+		padding-bottom: 40px;
+	}
+
+	.featured {
+		position: absolute;
+	}
+}
 </style>
+
+<?php
+}, 999); // End wp_footer
+?>
