@@ -76,7 +76,7 @@
                 autoplaySpeed: isContinuousScrolling ? 0 : 3000, // Continuous scrolling: 0 for seamless transition
                 cssEase: isContinuousScrolling ? 'linear' : 'ease', // Linear easing for continuous scrolling
                 pauseOnHover: true,
-                slidesToShow: isCustomerCarousel ? 8 : (isSuccessStories ? 3 : (isLatestResources ? 1 : (isProductFeature ? 1 : (isComparisonCards ? 1 : (isComparisonTable ? 1 : (isVerticalCarousel ? 1 : 6)))))), // Vertical carousel shows 1 slide at a time
+                slidesToShow: isCustomerCarousel ? 6 : (isSuccessStories ? 3 : (isLatestResources ? 1 : (isProductFeature ? 1 : (isComparisonCards ? 1 : (isComparisonTable ? 1 : (isVerticalCarousel ? 1 : 6)))))), // Vertical carousel shows 1 slide at a time
                 slidesToScroll: 1,
                 swipeToSlide: isContinuousScrolling, // Enable swipe to slide for continuous scrolling carousels
                 centerMode: isSuccessStories || isLatestResources || isProductFeature || isComparisonTable || isVerticalCarousel || isContinuousScrolling, // Enable center mode for success stories, latest resources, product feature, comparison table, vertical carousel, and continuous scrolling carousels

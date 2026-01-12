@@ -57,7 +57,7 @@ add_action('wp_enqueue_scripts', 'assets');
 
 function add_defer_attribute($tag, $handle) {
     // An array of the script handles where we want to add 'defer'
-    $scripts_to_defer = array('mmenu_light_js', 'observer_js', 'scripts_js', 'home_js', 'team_js', 'components_js', 'component_faqs', 'component_carousel', 'component_video', 'component_form', 'component_solutions', 'component_product-detail', 'component_testimonials', 'component_vertical-tabs');
+    $scripts_to_defer = array('mmenu_light_js', 'observer_js', 'scripts_js', 'home_js', 'team_js', 'components_js', 'component_faqs', 'component_carousel', 'component_video', 'component_form', 'component_solutions', 'component_product-detail', 'component_testimonials', 'component_vertical-tabs', 'component_vertical-carousel', 'gsap', 'gsap-scrolltrigger');
 
     // If the handle matches, add the 'defer' attribute
     foreach($scripts_to_defer as $defer_script) {
@@ -140,6 +140,8 @@ function enqueue_component_assets() {
         'product_feature_carousel' => 'carousel',
         'recommended_products' => 'carousel',
         'vertical_tabs' => 'vertical-tabs',
+        'vertical_carousel' => 'vertical-carousel',
+        'application_cards' => 'application-cards',
         
         // Global components (note the 'global_' prefix)
         'global_customer_carousel' => 'carousel',
@@ -165,6 +167,27 @@ function enqueue_component_assets() {
     // Ensure jQuery is loaded (WordPress default)
     wp_enqueue_script('jquery');
     
+    // Check if vertical_carousel is used and enqueue GSAP libraries
+    if (in_array('vertical_carousel', $components_used)) {
+        // Enqueue GSAP core library
+        wp_enqueue_script(
+            'gsap',
+            'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
+            array(),
+            '3.12.5',
+            true
+        );
+        
+        // Enqueue ScrollTrigger plugin
+        wp_enqueue_script(
+            'gsap-scrolltrigger',
+            'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
+            array('gsap'),
+            '3.12.5',
+            true
+        );
+    }
+    
     // Note: Slick Carousel is already bundled in global-scripts.min.js (loaded as 'scripts_js')
     // We don't need to load it again - just ensure scripts_js is a dependency for carousel components
     
@@ -175,6 +198,11 @@ function enqueue_component_assets() {
         // If carousel/product-detail, depend on scripts_js (which contains Slick)
         if ($script === 'carousel' || $script === 'product-detail') {
             $dependencies[] = 'scripts_js'; // Use existing handle instead of loading duplicate
+        }
+        
+        // If vertical-carousel, depend on GSAP libraries
+        if ($script === 'vertical-carousel') {
+            $dependencies[] = 'gsap-scrolltrigger';
         }
         
         wp_enqueue_script(

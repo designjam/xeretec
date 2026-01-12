@@ -20,7 +20,7 @@ if ($content && $challenges):
 
         <div class="w-1/2 w-full">
           <?php if ($content): ?>
-            <div class="mb-8 max-w-none">
+            <div class="mb-8">
               <?php echo wp_kses_post($content); ?>
             </div>
           <?php endif; ?>

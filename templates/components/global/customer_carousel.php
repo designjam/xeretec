@@ -29,10 +29,10 @@ if ($customers):
                                 <?php if ($customer['logo']): ?>
                                     <?php if ($customer['link']): ?>
                                         <a href="<?php echo esc_url($customer['link']['url']); ?>" class="block">
-                                            <img src="<?php echo esc_url($customer['logo']['url']); ?>" alt="<?php echo esc_attr($customer['logo']['alt'] ?: $customer['name']); ?>" class="object-contain mx-auto max-h-24">
+                                            <img src="<?php echo esc_url($customer['logo']['url']); ?>" alt="<?php echo esc_attr($customer['logo']['alt'] ?: $customer['name']); ?>" class="object-contain mx-auto max-h-32">
                                         </a>
                                     <?php else: ?>
-                                        <img src="<?php echo esc_url($customer['logo']['url']); ?>" alt="<?php echo esc_attr($customer['logo']['alt'] ?: $customer['name']); ?>" class="object-contain mx-auto max-h-24">
+                                        <img src="<?php echo esc_url($customer['logo']['url']); ?>" alt="<?php echo esc_attr($customer['logo']['alt'] ?: $customer['name']); ?>" class="object-contain mx-auto max-h-32">
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </div>

@@ -58,12 +58,35 @@ if ($testimonials):
                       </p>
                     <?php endif; ?>
 
-
-                        <?php if ($first_testimonial['name']): ?>
-                          <h4 class="xl:pt-5 pt-3 font-bold text-[16px] xl:text-[18px] text-white testimonial-name">
-                            <?php echo esc_html($first_testimonial['name']); ?>
-                          </h4>
-                        <?php endif; ?>
+                    <!-- Profile Section -->
+                    <?php 
+                    $profile_image = $first_testimonial['profile'] ?? null;
+                    if ($profile_image):
+                      $profile_name = $first_testimonial['profile_name'] ?? $first_testimonial['name'] ?? '';
+                      $profile_role = $first_testimonial['profile_role'] ?? '';
+                    ?>
+                      <div class="flex gap-4 items-center pt-3 xl:pt-5 testimonial-profile">
+                        <div class="flex-shrink-0 testimonial-image-wrapper">
+                          <img src="<?php echo esc_url($profile_image['url']); ?>" 
+                               alt="<?php echo esc_attr($profile_image['alt'] ?: ($profile_name ?: 'Profile')); ?>" 
+                               class="object-cover w-32 h-32 rounded-full testimonial-image">
+                        </div>
+                        
+                        <div class="flex flex-col testimonial-profile-info">
+                          <?php if ($profile_name): ?>
+                            <h4 class="font-bold text-[16px] xl:text-[18px] mb-0 !m-0 text-white testimonial-name">
+                              <?php echo esc_html($profile_name); ?>
+                            </h4>
+                          <?php endif; ?>
+                          
+                          <?php if ($profile_role): ?>
+                            <p class="text-[14px] xl:text-[16px] text-white/80 p-0 !m-0 testimonial-role">
+                              <?php echo esc_html($profile_role); ?>
+                            </p>
+                          <?php endif; ?>
+                        </div>
+                      </div>
+                    <?php endif; ?>
                   </div>
                 </div>
               </div>
@@ -82,7 +105,11 @@ if ($testimonials):
                      'company' => $testimonial['company'] ?? $testimonial['name'] ?? '',
                      'job_title' => $testimonial['job_title'] ?? '',
                      'image' => $testimonial['image']['url'] ?? '',
-                     'image_alt' => $testimonial['image']['alt'] ?? ''
+                     'image_alt' => $testimonial['image']['alt'] ?? '',
+                     'profile' => $testimonial['profile']['url'] ?? '',
+                     'profile_alt' => $testimonial['profile']['alt'] ?? '',
+                     'profile_name' => $testimonial['profile_name'] ?? $testimonial['name'] ?? '',
+                     'profile_role' => $testimonial['profile_role'] ?? ''
                    ])); ?>'>
                 <?php if ($logo): ?>
                   <div class="flex justify-center items-center p-6 h-full transition-all duration-300 aspect-video md:aspect-square rounded-10 shadow-custom logo-card-inner hover:shadow-xl">

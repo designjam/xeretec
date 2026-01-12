@@ -52,22 +52,23 @@
                     "type": "image",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": false,
+                    "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
                     "return_format": "array",
-                    "preview_size": "medium",
                     "library": "all",
-                    "min_width": 0,
-                    "min_height": 0,
-                    "min_size": 0,
-                    "max_width": 0,
-                    "max_height": 0,
-                    "max_size": 0,
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
                     "mime_types": "",
+                    "allow_in_bindings": 1,
+                    "preview_size": "medium",
                     "parent_repeater": "field_customer_carousel_items"
                 },
                 {
@@ -130,5 +131,5 @@
     "description": "Customer Carousel component fields - cloned into flexible content",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1764169206
+    "modified": 1767095686
 }

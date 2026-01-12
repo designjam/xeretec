@@ -22,14 +22,14 @@ if ($image):
 
   <section class="component-wrapper <?php echo esc_attr($bg_class); ?> <?php echo esc_attr($text_class); ?>" id="<?php echo esc_attr($component_id); ?>">
     <div class="container mx-auto">
-      <div class="flex flex-col gap-16 items-center lg:flex-row-reverse lg:gap-32">
+      <div class="flex flex-col gap-16 items-center lg:flex-row-reverse xl:gap-32">
 
-        <div class="w-full lg:w-1/2 max-w-[650px]">
+        <div class="hidden lg:block w-2/5  max-w-[650px]">
           <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="w-full h-auto <?php echo esc_attr($image_styling); ?>">
         </div>
 
         <!-- Content -->
-        <div class="w-full flex-1  flex flex-col gap-8 !text-center lg:!text-left">
+        <div class="w-full flex-1  flex flex-col gap-8 !text-center lg:!text-left xl:pr-32">
           <?php if ($content): ?>
             <div class="max-w-none <?php echo esc_attr($text_class); ?>">
               <?php echo wp_kses_post($content); ?>

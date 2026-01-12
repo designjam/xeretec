@@ -6,6 +6,7 @@
             "key": "field_application_cards_content",
             "label": "Content",
             "name": "content",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -25,68 +26,163 @@
             "key": "field_application_center_image",
             "label": "Center Image",
             "name": "center_image",
+            "aria-label": "",
             "type": "image",
-            "return_format": "array",
+            "instructions": "",
             "required": 0,
+            "conditional_logic": false,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
-            }
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
         },
         {
             "key": "field_application_cards",
             "label": "Application Cards",
             "name": "application_cards",
+            "aria-label": "",
             "type": "repeater",
+            "instructions": "",
             "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "min": 1,
             "layout": "block",
             "button_label": "Add Application Card",
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
             "sub_fields": [
                 {
                     "key": "field_app_card_icon",
                     "label": "Icon",
                     "name": "icon",
+                    "aria-label": "",
                     "type": "image",
-                    "return_format": "array",
+                    "instructions": "",
                     "required": 0,
+                    "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
-                    }
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 1,
+                    "preview_size": "medium",
+                    "parent_repeater": "field_application_cards"
+                },
+                {
+                    "key": "field_6953c8fc4b915",
+                    "label": "Image",
+                    "name": "image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 1,
+                    "preview_size": "medium",
+                    "parent_repeater": "field_application_cards"
                 },
                 {
                     "key": "field_app_card_title",
                     "label": "Title",
                     "name": "title",
+                    "aria-label": "",
                     "type": "text",
+                    "instructions": "",
                     "required": 0,
+                    "conditional_logic": false,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
-                    }
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_application_cards"
                 },
                 {
                     "key": "field_app_card_description",
                     "label": "Description",
                     "name": "description",
+                    "aria-label": "",
                     "type": "textarea",
+                    "instructions": "",
                     "required": 0,
+                    "conditional_logic": false,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
-                    }
+                    },
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "rows": "",
+                    "parent_repeater": "field_application_cards"
+                },
+                {
+                    "key": "field_6953c9054b916",
+                    "label": "Link",
+                    "name": "link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_application_cards"
                 }
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            }
+            ]
         }
     ],
     "location": [
@@ -94,7 +190,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "template-component-library.php"
+                "value": "default"
             }
         ]
     ],
@@ -107,5 +203,6 @@
     "active": true,
     "description": "Application Cards component fields - cloned into flexible content",
     "show_in_rest": 0,
-    "modified": 1764003444
+    "display_title": "",
+    "modified": 1767098657
 }

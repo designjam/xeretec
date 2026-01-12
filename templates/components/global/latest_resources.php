@@ -58,13 +58,13 @@
                         </span>
                       <?php endif; ?>
                       
-                      <h3 class="mb-3 text-[23px] font-bold transition-colors text-brand <?php echo $is_first ? 'lg:text-[36px]' : ''; ?>">
+                      <h3 class="mb-3  font-bold transition-colors text-brand <?php echo $is_first ? 'lg:text-[36px] leading-[44px]' : 'text-[23px] leading-[30px]'; ?>">
                         <?php echo esc_html(get_the_title()); ?>
                       </h3>
                       
                       <?php if ($excerpt): ?>
                         <p class="flex-grow mt-0 mb-4 text-gray-600">
-                          <?php echo esc_html(wp_trim_words($excerpt, 20)); ?>
+                          <?php echo esc_html(wp_trim_words($excerpt, $is_first ? 30 : 15)); ?>
                         </p>
                       <?php endif; ?>
                       
@@ -85,12 +85,15 @@
           <div class="latest-resources-carousel-slick lg:hidden">
             <?php 
             $latest_posts->rewind_posts();
+            $mobile_post_index = 0;
             while ($latest_posts->have_posts()): 
               $latest_posts->the_post();
+              $mobile_post_index++;
               $featured_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
               $categories = get_the_terms(get_the_ID(), 'type');
               $category_name = !empty($categories) && !is_wp_error($categories) ? $categories[0]->name : '';
               $excerpt = get_field('fld_insight_excerpt');
+              $is_first_mobile = $mobile_post_index === 1;
             ?>
               <div class="p-4">
                 <a href="<?php echo esc_url(get_permalink()); ?>" class="block group">
@@ -103,7 +106,7 @@
                       </div>
                     <?php endif; ?>
                     
-                    <div class="flex flex-col flex-grow p-6 xl:p-12">
+                    <div class="flex flex-col flex-grow p-10 xl:p-12">
                       <?php if ($category_name): ?>
                         <span class="inline-block self-start px-3 py-1 mb-4 text-[14px] font-semibold text-white bg-brand-dark rounded-full">
                           <?php echo esc_html($category_name); ?>
@@ -116,12 +119,12 @@
                       
                       <?php if ($excerpt): ?>
                         <p class="flex-grow mt-0 mb-4 text-gray-600">
-                          <?php echo esc_html(wp_trim_words($excerpt, 20)); ?>
+                          <?php echo esc_html(wp_trim_words($excerpt, $is_first_mobile ? 30 : 20)); ?>
                         </p>
                       <?php endif; ?>
                       
                       <span class="button-tertiary">
-                        Read more →
+                        Read more
                       </span>
                     </div>
                   </div>

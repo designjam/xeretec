@@ -158,10 +158,10 @@
                     },
                     "default_value": "",
                     "maxlength": "",
-                    "allow_in_bindings": 1,
+                    "allow_in_bindings": 0,
                     "rows": "",
                     "placeholder": "",
-                    "new_lines": "br",
+                    "new_lines": "",
                     "parent_repeater": "field_service_cards_items"
                 },
                 {
@@ -237,5 +237,5 @@
     "description": "Service Cards component fields - cloned into flexible content",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1765891745
+    "modified": 1767092957
 }

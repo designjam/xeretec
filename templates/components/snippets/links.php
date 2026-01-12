@@ -7,7 +7,7 @@
 $primary_cta = get_sub_field('primary_cta');
 $secondary_cta = get_sub_field('secondary_cta');
 ?>
-<div class="flex flex-col sm:flex-row gap-4 flex-wrap">
+<div class="flex flex-col flex-wrap gap-8 sm:flex-row">
   <?php if ($primary_cta): ?>
     <a href="<?php echo esc_url($primary_cta['url']); ?>" class="button-primary">
       <?php echo esc_html($primary_cta['title']); ?>

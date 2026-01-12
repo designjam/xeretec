@@ -12,13 +12,13 @@ if ($content && $repeatable_cards):
   $component_id = 'vertical-carousel-' . get_row_index(); 
 ?>
 
-  <section class="min-h-screen text-white lg:pt-0 lg:pb-0 component-wrapper bg-dark" id="<?php echo esc_attr($component_id); ?>" data-carousel>
+  <section class="text-white lg:pt-0 lg:pb-0 component-wrapper bg-dark" id="<?php echo esc_attr($component_id); ?>" data-carousel>
     <div class="container mx-auto">
 
-      <div class="flex flex-col lg:flex-row lg:gap-48">
+      <div class="flex flex-col gap-16 justify-center lg:items-center lg:flex-row lg:gap-48">
 
         <!-- Left Content -->
-        <div class="pinned-content w-full lg:w-1/2 !text-center lg:!text-left mt-32">
+        <div class="w-full lg:w-1/2 !text-center lg:!text-left ">
           <?php if ($content): ?>
             <div class="mb-8 max-w-none">
               <?php echo wp_kses_post($content); ?>
@@ -30,11 +30,12 @@ if ($content && $repeatable_cards):
           </div>
         </div>
 
-        <!-- Right Vertical  -->
+        <!-- Right Vertical Carousel -->
         <?php if ($repeatable_cards): ?>
-          <div class="relative flex-1">
+          <div class="relative flex-1 lg:pr-16">
+            <div class="vertical-carousel-slick">
               <?php foreach ($repeatable_cards as $card): ?>
-                <div class="mb-10 card-container">
+                <div class="mb-10 vertical-carousel-slide">
                   <?php if ($card['link']): ?>
                     <a href="<?php echo esc_url($card['link']['url']); ?>" class="block flex flex-col gap-6 bg-white shadow-xl transition cursor-pointer rounded-10 hover:shadow-xl text-dark group">
                   <?php else: ?>
@@ -68,6 +69,9 @@ if ($content && $repeatable_cards):
                   <?php endif; ?>
                 </div>
               <?php endforeach; ?>
+            </div>
+            <!-- Vertical dots navigation wrapper -->
+            <div class="vertical-carousel-dots"></div>
           </div>
         <?php endif; ?>
 

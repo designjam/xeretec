@@ -11,7 +11,7 @@ if ($vertical_tabs):
     ?>
     
     <section class="component-wrapper bg-light-fade-down" id="<?php echo esc_attr($component_id); ?>" data-vertical-tabs>
-        <div class="container flex flex-col gap-20 mx-auto">
+        <div class="container flex flex-col gap-20 mx-auto max-w-[1300px]">
             
             <?php if ($content): ?>
                 <div class="text-center">
@@ -26,7 +26,7 @@ if ($vertical_tabs):
                     <div class="flex flex-col lg:flex-row justify-stretch">
                         
                         <!-- Left Column: Vertical Tabs Navigation (Desktop) / Accordion (Mobile) -->
-                        <div class="flex-shrink-0 w-full lg:w-1/3">
+                        <div class="flex-shrink-0 w-full lg:w-1/4">
                             <nav class="flex flex-col gap-0 divide-y divide-gray-300" role="tablist">
                                 <?php foreach ($vertical_tabs as $index => $tab): 
                                     $is_active = $index === 0;
@@ -45,7 +45,7 @@ if ($vertical_tabs):
                                             aria-expanded="<?php echo $is_active ? 'true' : 'false'; ?>"
                                             data-tab-toggle="<?php echo esc_attr($panel_id); ?>"
                                             data-tab-index="<?php echo $index; ?>"
-                                            class="vertical-tab-button border-none bg-[#575757] flex items-center justify-between w-full px-6 !py-4 lg:!py-10 text-left rounded-none transition-all duration-300 <?php echo $is_active ? 'bg-[#575757] text-white' : 'bg-white text-[#4B5563] hover:bg-[#575757'; ?>"
+                                            class="vertical-tab-button border-none bg-[#575757] text-[19px] flex items-center justify-between w-full px-6 !py-4 lg:!py-10 text-left rounded-none transition-all duration-300 <?php echo $is_active ? 'bg-[#575757] text-white' : 'bg-white text-[#4B5563] hover:bg-[#575757'; ?>"
                                         >
                                             <span class="font-semibold"><?php echo esc_html($title); ?></span>
                                             <!-- Accordion icon for mobile -->
@@ -91,7 +91,7 @@ if ($vertical_tabs):
                         </div>
                         
                         <!-- Right Column: Tab Content Panels (Desktop Only) -->
-                        <div class="hidden flex-shrink-0 w-full shadow-2xl bg-light-fade-up lg:block lg:w-2/3">
+                        <div class="hidden flex-shrink-0 w-full shadow-2xl bg-light-fade-up lg:block lg:w-3/4">
                             <?php foreach ($vertical_tabs as $index => $tab): 
                                 $is_active = $index === 0;
                                 $panel_id = 'panel-' . $component_id . '-' . $index;
@@ -110,20 +110,20 @@ if ($vertical_tabs):
                                     data-tab-panel
                                     class="vertical-tab-panel transition-all duration-300 <?php echo $is_active ? 'opacity-100 block' : 'opacity-0 hidden'; ?>"
                                 >
-                                    <div class="flex flex-col gap-8 items-start p-8 md:p-10 lg:p-12 lg:flex-row justify-stretch">
+                                    <div class="flex flex-col gap-8 items-start lg:flex-row lg:items-stretch justify-stretch">
                                         
                                         <!-- Left side: Content -->
-                                        <div class="flex flex-col flex-1 gap-6">
+                                        <div class="flex flex-col flex-1 gap-6 p-8 md:p-10 lg:p-12">
                                             <?php if ($icon && isset($icon['url'])): ?>
                                                 <img 
                                                     src="<?php echo esc_url($icon['url']); ?>" 
                                                     alt="<?php echo esc_attr($icon['alt'] ?? ''); ?>"
-                                                    class="object-contain w-16 h-16"
+                                                    class="object-contain w-32 h-32"
                                                 >
                                             <?php endif; ?>
                                             
                                             <?php if ($description): ?>
-                                                <div class="text-[#4B5563] leading-relaxed">
+                                                <div class="leading-relaxed">
                                                     <?php echo wp_kses_post($description); ?>
                                                 </div>
                                             <?php endif; ?>
@@ -143,11 +143,11 @@ if ($vertical_tabs):
                                         
                                         <!-- Right side: Image -->
                                         <?php if ($image && isset($image['url'])): ?>
-                                            <div class="w-full h-full lg:w-auto lg:max-w-md">
+                                            <div class="w-full lg:w-auto lg:max-w-lg lg:self-stretch">
                                                 <img 
                                                     src="<?php echo esc_url($image['url']); ?>" 
                                                     alt="<?php echo esc_attr($image['alt'] ?? ''); ?>"
-                                                    class="object-contain w-full h-auto rounded-lg"
+                                                    class="object-cover w-full h-full rounded-r-lg"
                                                 >
                                             </div>
                                         <?php endif; ?>
