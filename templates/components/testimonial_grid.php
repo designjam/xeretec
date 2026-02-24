@@ -65,7 +65,7 @@ if ($testimonials):
                     $profile_role = $first_testimonial['profile_role'] ?? '';
                     $has_profile_class = $profile_image ? 'has-profile' : '';
                     ?>
-                    <div class="flex gap-4 items-center pt-3 xl:hidden 2xl:flex xl:pt-5 testimonial-profile <?php echo esc_attr($has_profile_class); ?>">
+                    <div class="flex gap-4 items-center pt-3 2xl:flex xl:pt-5 testimonial-profile <?php echo esc_attr($has_profile_class); ?>">
                       <div class="flex-shrink-0 testimonial-image-wrapper">
                         <?php if ($profile_image): ?>
                           <img src="<?php echo esc_url($profile_image['url']); ?>" 

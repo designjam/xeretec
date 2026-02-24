@@ -251,7 +251,7 @@ background: linear-gradient(118deg,rgba(13, 19, 37, 1) 0%, rgba(13, 19, 37, 1) 4
 
 /* Newsletter Section */
 #footer-new .footer__newsletter {
-    padding-right: 2rem;
+    /* padding-right: 2rem; */
     max-width: 500px;
     margin: 0 auto;
 }
@@ -752,7 +752,7 @@ a.button-contact:hover::after {
   height: 80px;
   width: auto;
   position: absolute;
-  top: 10px;
+  top: 0px;
 }
 
 .mobile-header-bar__actions {
