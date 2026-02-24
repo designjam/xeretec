@@ -7,7 +7,7 @@
 
 <header class="site-header<?php if (is_404() || is_search() || is_page_template('template-default-tv.php') || is_page_template('template-career.php') || is_page_template('sitemap.php')): echo " site-header--dark"; endif; ?>">
     <div id="skiplink-container">
-        <div class="container"> 
+        <div class="container">
             <a href="#content" class="skiplink">Skip to main content</a>
         </div>
     </div>
@@ -25,7 +25,7 @@
                         <?php endif; ?>
                     </a>
 
-                    <div class="collapse navbar-collapse justify-content-end" id="primary-navigation">
+                    <div class="collapse navbar-collapse justify-content-center" id="primary-navigation">
                         <div class="backdrop"></div>
                         <div class="primary-navigation--outer">
                             <div class="container container--primary-navigation">
@@ -41,30 +41,64 @@
                                 ?>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="site-search site-search--closed">
-                        <button class="search-toggle" aria-label="Search the website"></button>
-                        <div class="search-form-container">
-                            <?php get_search_form();?>
+
+                        <div class="menu-buttons-wrapper">
+                            <a href="/contact-us/" class="button-contact">
+                              Contact us
+                            </a>
+
+                          <div class="site-search site-search--closed">
+                            <button class="search-toggle" aria-label="Search the website"></button>
+                            <div class="search-form-container">
+                              <?php get_search_form();?>
+                            </div>
+                          </div>
                         </div>
                     </div>
-       
+
                     <button id="primary-navigation-mobile-toggle" href="#primary-navigation-mobile" aria-label="Open the navigation" aria-controls="primary-navigation-mobile"><span class="primary-navigation-mobile-icon"></span></button>
                     <div class="collapse navbar-collapse justify-content-end" id="primary-navigation-mobile">
                         <?php
                             wp_nav_menu( array(
-                                'theme_location'    => 'primary_navigation',
+                                'theme_location'    => 'primary_navigation_mobile',
                                 'depth'             => 4,
                                 'menu_class'        => 'navbar-nav navbar--primary',
                                 'container_id'      => 'menu-location-primary_navigation_mobile'
                                 )
                             );
                         ?>
-                    </div>                    
+                    </div>
 
                 </nav>
             </div>
         </div>
     </div>
 </header>
+
+<script>
+(function() {
+    // Sticky Header Background - Add background after scrolling 100px
+    var headerScrollTrigger = 100;
+    var header = document.querySelector('.site-header');
+    
+    if (header) {
+        var updateHeaderBackground = function() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > headerScrollTrigger) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+        
+        // Check on page load
+        updateHeaderBackground();
+        
+        // Check on scroll
+        window.addEventListener('scroll', updateHeaderBackground);
+    }
+})();
+</script>
+
+<?php get_template_part('templates/components/mobile-menu'); ?>
+

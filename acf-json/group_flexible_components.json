@@ -177,6 +177,38 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_69733cd4bde9a": {
+                    "key": "layout_69733cd4bde9a",
+                    "name": "testimonial_grid",
+                    "label": "Testimonial Grid",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_69733cd4bde9c",
+                            "label": "",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_component_testimonials"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_faqs": {
                     "key": "layout_faqs",
                     "name": "faqs",
@@ -760,5 +792,5 @@
     "description": "Flexible content components for building page layouts",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1767093278
+    "modified": 1769160017
 }

@@ -135,6 +135,149 @@ h2 span:first-child {
   }
 }
 
+/* Customer Carousel - CSS-only continuous scroll (conveyor belt) */
+.customer-carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.customer-carousel-track {
+  display: flex;
+  width: fit-content;
+  animation: customer-carousel-scroll 40s linear infinite;
+  will-change: transform;
+  gap: 0; /* Ensure no gap between items */
+}
+
+.customer-carousel-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Fixed width - container width will determine how many items are visible */
+  /* All items evenly spaced with consistent width */
+  
+  width: 300px;
+  padding: 0 30px;
+  
+  @media (max-width: 1024px) {
+    width: 220px;
+    padding: 0 20px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 200px;
+    padding: 0 12px;
+  }
+  
+  @media (max-width: 640px) {
+    width: 180px;
+    padding: 0 10px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 160px;
+    padding: 0 8px;
+  }
+}
+
+@keyframes customer-carousel-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Move by exactly half the width (since we duplicated the items for seamless loop) */
+    transform: translateX(-50%);
+  }
+}
+
+/* Partner Carousel - CSS-only continuous scroll (conveyor belt) */
+.partner-carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+
+.partner-carousel-track {
+  display: flex;
+  width: fit-content;
+  animation: partner-carousel-scroll 40s linear infinite;
+  will-change: transform;
+  gap: 0; /* Ensure no gap between items */
+}
+
+.partner-carousel-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Fixed width - container width will determine how many items are visible */
+  /* All items evenly spaced with consistent width */
+  width: 300px;
+  padding: 0 30px;
+  
+  @media (max-width: 1024px) {
+    width: 220px;
+    padding: 0 20px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 200px;
+    padding: 0 12px;
+  }
+  
+  @media (max-width: 640px) {
+    width: 180px;
+    padding: 0 10px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 160px;
+    padding: 0 8px;
+  }
+}
+
+@keyframes partner-carousel-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Move by exactly half the width (since we duplicated the items for seamless loop) */
+    transform: translateX(-50%);
+  }
+}
+
 /* Success Stories carousel specific styles */
 #success-stories {
   @apply lg:px-0;
@@ -392,6 +535,13 @@ h2 span:first-child {
     background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.56 14" fill="%23FFFFFF"><path d="M15.27,6.29L9.44.29c-.09-.09-.2-.17-.32-.22-.12-.05-.24-.08-.37-.08s-.25.03-.37.08c-.12.05-.23.12-.32.22-.09.09-.16.2-.21.32-.05.12-.07.25-.07.38s.03.26.07.38c.05.12.12.23.21.32l4.17,4.29H.97c-.26,0-.51.11-.69.29-.18.19-.28.44-.28.71s.1.52.28.71c.18.19.43.29.69.29h11.26l-4.17,4.29c-.18.19-.29.44-.29.71s.1.52.29.71c.18.19.43.29.69.29s.51-.11.69-.29l5.83-6c.18-.19.29-.44.29-.71s-.1-.52-.29-.71Z"/></svg>');
   }
 }
+.button-primary.contact {
+  @apply bg-white bg-none text-brand-dark px-6 py-3;
+
+  &::after {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.56 14" fill="%23000000"><path d="M15.27,6.29L9.44.29c-.09-.09-.2-.17-.32-.22-.12-.05-.24-.08-.37-.08s-.25.03-.37.08c-.12.05-.23.12-.32.22-.09.09-.16.2-.21.32-.05.12-.07.25-.07.38s.03.26.07.38c.05.12.12.23.21.32l4.17,4.29H.97c-.26,0-.51.11-.69.29-.18.19-.28.44-.28.71s.1.52.28.71c.18.19.43.29.69.29h11.26l-4.17,4.29c-.18.19-.29.44-.29.71s.1.52.29.71c.18.19.43.29.69.29s.51-.11.69-.29l5.83-6c.18-.19.29-.44.29-.71s-.1-.52-.29-.71Z"/></svg>');
+  }
+}
 
 .bg-light {
   background: #FBF7FF;
@@ -524,7 +674,7 @@ h2 span:first-child {
   .hs-error-msgs {
     @apply hidden;
   }
-  input, textarea, select {
+  input, textarea, select { 
     @apply bg-white px-4 py-3 w-full text-brand-dark rounded-lg border-2 border-transparent;
 
     &::placeholder {
@@ -571,6 +721,9 @@ h2 span:first-child {
       @apply invert brightness-0;
      }
   }
+  .testimonial-profile:not(.has-profile) {
+    display: none !important;
+  }
 }
 .circular-chart {
   display: block;
@@ -587,12 +740,17 @@ h2 span:first-child {
 .circle {
   fill: none;
   stroke-width: 3.8;
+  animation: none;
+  stroke-dasharray: 0, 100;
+}
+
+.circular-chart.is-animating .circle {
   animation: progress 1s ease-out forwards;
 }
 
 @keyframes progress {
-  0% {
-    stroke-dasharray: 0 100;
+  from {
+    stroke-dasharray: 0, 100;
   }
 }
 
@@ -853,5 +1011,53 @@ h2 span:first-child {
     img {
       @apply flex-shrink-0 mt-2 w-7 h-7;
     }
+  }
+}
+
+/* ==========================================================================
+   APPLICATION CARDS HOVER CONTENT FADE
+   ========================================================================== */
+.application-card-content-wrapper {
+  position: relative;
+  min-height: 60px; /* Ensure consistent height */
+}
+
+.application-card-default-content {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.application-card-hover-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  text-align: center;
+}
+
+/* Only fade out default content if hover content exists */
+.application-card:hover:has(.application-card-hover-content) {
+  .application-card-default-content {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .application-card-hover-content {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.component-wrapper {
+  ul {
+    @apply list-disc list-inside;
+  }
+  ol {
+    @apply list-decimal list-inside;
   }
 }

@@ -32,19 +32,32 @@ if ($content && $application_cards):
                         $has_link = $card_link && !empty($card_link['url']);
                         $card_wrapper_tag = $has_link ? 'a' : 'div';
                         $card_wrapper_attrs = $has_link ? 'href="' . esc_url($card_link['url']) . '"' . (!empty($card_link['target']) ? ' target="' . esc_attr($card_link['target']) . '"' : '') : '';
+                        $hover_text = !empty($card['hover']) ? $card['hover'] : '';
                     ?>
-                        <<?php echo $card_wrapper_tag; ?> <?php echo $card_wrapper_attrs; ?> class="application-card px-6 py-8 text-center bg-white rounded-10 shadow-custom transition-all group hover:!bg-brand-dark duration-300<?php echo $has_link ? ' block no-underline text-inherit hover:shadow-lg cursor-pointer hover:text-inherit' : ''; ?>" data-card-image="<?php echo $card_image ? esc_url($card_image) : ''; ?>" data-default-image="<?php echo $center_image ? esc_url($center_image['url']) : ''; ?>">
+                        <<?php echo $card_wrapper_tag; ?> <?php echo $card_wrapper_attrs; ?> class="application-card px-6 py-8 text-center bg-white rounded-10 shadow-custom transition-all group hover:!bg-brand-dark duration-300 relative<?php echo $has_link ? ' block no-underline text-inherit hover:shadow-lg cursor-pointer hover:text-inherit' : ''; ?>" data-card-image="<?php echo $card_image ? esc_url($card_image) : ''; ?>" data-default-image="<?php echo $center_image ? esc_url($center_image['url']) : ''; ?>">
                             <?php if ($card['icon']): ?>
                                 <img src="<?php echo esc_url($card['icon']['url']); ?>" alt="<?php echo esc_attr($card['icon']['alt']); ?>" class="mx-auto mb-4 w-16 h-16 group-hover:invert group-hover:brightness-0">
                             <?php endif; ?>
                             
-                            <?php if ($card['title']): ?>
-                                <h3 class=" text-[23px] font-bold group-hover:text-white"><?php echo esc_html($card['title']); ?></h3>
-                            <?php endif; ?>
-                            
-                            <?php if ($card['description']): ?>
-                                <p class="text-[16px] lg:text-[18px] !mt-3 text-gray-600 group-hover:text-white"><?php echo esc_html($card['description']); ?></p>
-                            <?php endif; ?>
+                            <div class="relative application-card-content-wrapper">
+                                <?php if ($card['title'] || $card['description']): ?>
+                                    <div class="application-card-default-content">
+                                        <?php if ($card['title']): ?>
+                                            <h3 class="text-[23px] font-bold group-hover:text-white"><?php echo esc_html($card['title']); ?></h3>
+                                        <?php endif; ?>
+                                        
+                                        <?php if ($card['description']): ?>
+                                            <p class="text-[16px] lg:text-[18px] !mt-3 text-gray-600 group-hover:text-white"><?php echo esc_html($card['description']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <?php if ($hover_text): ?>
+                                    <div class="application-card-hover-content">
+                                        <p class="text-[16px] lg:text-[18px] text-white"><?php echo esc_html($hover_text); ?></p>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </<?php echo $card_wrapper_tag; ?>>
                     <?php endforeach; ?>
                 </div>
@@ -52,7 +65,7 @@ if ($content && $application_cards):
                 <!-- Center Image -->
                 <?php if ($center_image): ?>
                     <div class="hidden lg:flex lg:flex-col max-w-[560px] self-stretch">
-                        <img id="<?php echo esc_attr($component_id); ?>-center-image" src="<?php echo esc_url($center_image['url']); ?>" alt="<?php echo esc_attr($center_image['alt']); ?>" class="object-cover object-center flex-1 w-full h-full transition-opacity duration-300 rounded-10 shadow-custom">
+                        <img id="<?php echo esc_attr($component_id); ?>-center-image" src="<?php echo esc_url($center_image['url']); ?>" alt="<?php echo esc_attr($center_image['alt']); ?>" class="object-cover object-center flex-1 w-full h-full opacity-100 transition-opacity duration-500 rounded-10 shadow-custom">
                     </div>
                 <?php endif; ?>
                 
@@ -66,19 +79,32 @@ if ($content && $application_cards):
                         $has_link = $card_link && !empty($card_link['url']);
                         $card_wrapper_tag = $has_link ? 'a' : 'div';
                         $card_wrapper_attrs = $has_link ? 'href="' . esc_url($card_link['url']) . '"' . (!empty($card_link['target']) ? ' target="' . esc_attr($card_link['target']) . '"' : '') : '';
+                        $hover_text = !empty($card['hover']) ? $card['hover'] : '';
                     ?>
-                        <<?php echo $card_wrapper_tag; ?> <?php echo $card_wrapper_attrs; ?> class="application-card px-6 py-8 text-center bg-white rounded-10 shadow-custom transition-all group hover:!bg-brand-dark duration-300<?php echo $has_link ? ' block no-underline text-inherit hover:shadow-lg cursor-pointer hover:text-inherit' : ''; ?>" data-card-image="<?php echo $card_image ? esc_url($card_image) : ''; ?>" data-default-image="<?php echo $center_image ? esc_url($center_image['url']) : ''; ?>">
-                          <?php if ($card['icon']): ?>
+                        <<?php echo $card_wrapper_tag; ?> <?php echo $card_wrapper_attrs; ?> class="application-card px-6 py-8 text-center bg-white rounded-10 shadow-custom transition-all group hover:!bg-brand-dark duration-300 relative<?php echo $has_link ? ' block no-underline text-inherit hover:shadow-lg cursor-pointer hover:text-inherit' : ''; ?>" data-card-image="<?php echo $card_image ? esc_url($card_image) : ''; ?>" data-default-image="<?php echo $center_image ? esc_url($center_image['url']) : ''; ?>">
+                            <?php if ($card['icon']): ?>
                                 <img src="<?php echo esc_url($card['icon']['url']); ?>" alt="<?php echo esc_attr($card['icon']['alt']); ?>" class="mx-auto mb-4 w-16 h-16 group-hover:invert group-hover:brightness-0">
                             <?php endif; ?>
                             
-                            <?php if ($card['title']): ?>
-                                <h3 class=" text-[23px] font-bold group-hover:text-white"><?php echo esc_html($card['title']); ?></h3>
-                            <?php endif; ?>
-                            
-                            <?php if ($card['description']): ?>
-                                <p class="text-[16px] lg:text-[18px] !mt-3 text-gray-600 group-hover:text-white"><?php echo esc_html($card['description']); ?></p>
-                            <?php endif; ?>
+                            <div class="relative application-card-content-wrapper">
+                                <?php if ($card['title'] || $card['description']): ?>
+                                    <div class="application-card-default-content">
+                                        <?php if ($card['title']): ?>
+                                            <h3 class="text-[23px] font-bold group-hover:text-white"><?php echo esc_html($card['title']); ?></h3>
+                                        <?php endif; ?>
+                                        
+                                        <?php if ($card['description']): ?>
+                                            <p class="text-[16px] lg:text-[18px] !mt-3 text-gray-600 group-hover:text-white"><?php echo esc_html($card['description']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <?php if ($hover_text): ?>
+                                    <div class="application-card-hover-content">
+                                        <p class="text-[16px] lg:text-[18px] text-white"><?php echo esc_html($hover_text); ?></p>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </<?php echo $card_wrapper_tag; ?>>
                     <?php endforeach; ?>
                 </div>

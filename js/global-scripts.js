@@ -221,7 +221,6 @@ jQuery(document).ready(function($){
 	$('.social-icons').eq(0).clone().prependTo('.social-container');
 	$('.social-icons').eq(0).clone().appendTo('#menu-location-primary_navigation_mobile');
 	$('.footer__brand').eq(0).clone().prependTo('#menu-location-primary_navigation_mobile');
-	$('.close').eq(0).clone().addClass('mobile-close').prependTo('#menu-location-primary_navigation_mobile');
 	//Mobile close functionality
 	$('.mobile-close').click(function(){
 		$('.mm-ocd').removeClass('mm-ocd--open');

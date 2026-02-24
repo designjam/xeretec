@@ -1,140 +1,167 @@
 /**
  * Vertical Carousel Component
- * Uses GSAP ScrollTrigger for pinned left content and sequential card animations
- * Cards fade/slide up from below, hold briefly, then slide up and off
+ * Uses CSS sticky positioning and Intersection Observer
+ * Cards scroll naturally in document flow
  */
 
 (function() {
     'use strict';
     
-    function initVerticalCarousel() {
-        // Check if GSAP and ScrollTrigger are available
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-            console.warn('GSAP ScrollTrigger is not loaded');
+    function initVerticalCarouselScroll() {
+        // Only run on desktop (min-width: 1024px)
+        if (window.innerWidth < 1024) {
             return;
         }
+
+        const sections = document.querySelectorAll('.vc-scroll-section');
         
-        // Register ScrollTrigger plugin
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Use matchMedia for responsive behavior
-        const mm = gsap.matchMedia();
-        
-        // Desktop behavior (min-width: 961px)
-        mm.add("(min-width: 961px)", () => {
-            const sections = document.querySelectorAll('[data-vertical-carousel]');
-            
-            sections.forEach((section) => {
-                const cardStack = section.querySelector('.card-stack');
-                const cards = gsap.utils.toArray(cardStack ? cardStack.querySelectorAll('.card') : []);
-                
-                if (cards.length === 0) {
-                    return;
-                }
-                
-                // Start cards hidden/off-screen (below)
-                gsap.set(cards, {
-                    opacity: 0,
-                    yPercent: 35,         // start below the visible area
-                    pointerEvents: "none"
+        sections.forEach((section) => {
+            const cards = section.querySelectorAll('.vc-scroll-card');
+            const bullets = section.querySelectorAll('.vc-scroll-nav-bullet');
+
+            if (cards.length === 0 || bullets.length === 0) return;
+
+            // Function to update active bullet
+            function updateActiveBullet(index) {
+                bullets.forEach((bullet, i) => {
+                    if (i === index) {
+                        bullet.classList.add('active');
+                    } else {
+                        bullet.classList.remove('active');
+                    }
                 });
+            }
+
+            // Function to get distance from viewport center
+            function getDistanceFromCenter(card) {
+                const rect = card.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                const cardCenter = rect.top + rect.height / 2;
+                const viewportCenter = viewportHeight / 2;
                 
-                // Animation timing settings
-                const hold = 0.5;       // increase for longer "pin" per card
-                const inDur = 0.35;     // entrance speed
-                const outDur = 0.35;    // exit speed
-                const gap = 0.15;       // small gap between cards
+                return Math.abs(cardCenter - viewportCenter);
+            }
+
+            // Function to find the most centered card
+            function findMostCenteredCard() {
+                let mostCenteredIndex = 0;
+                let smallestDistance = Infinity;
                 
-                // Create timeline for card animations
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top top",
-                        end: () => "+=" + (cards.length * 900), // increase to slow down overall
-                        scrub: true,
-                        pin: true,
-                        anticipatePin: 1
-                        // markers: true // uncomment for debugging
+                cards.forEach((card, index) => {
+                    const rect = card.getBoundingClientRect();
+                    // Only consider cards that are visible in viewport
+                    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                        const distance = getDistanceFromCenter(card);
+                        if (distance < smallestDistance) {
+                            smallestDistance = distance;
+                            mostCenteredIndex = index;
+                        }
                     }
                 });
                 
-                // Animate each card: in -> hold -> out
-                cards.forEach((card) => {
-                    // Card enters
-                    tl.to(card, {
-                        opacity: 1,
-                        yPercent: 0,
-                        duration: inDur,
-                        ease: "power2.out",
-                        pointerEvents: "auto"
-                    });
-                    
-                    // "Pinned" hold moment
-                    tl.to({}, { duration: hold });
-                    
-                    // Card exits
-                    tl.to(card, {
-                        opacity: 0,
-                        yPercent: -35, // exit above
-                        duration: outDur,
-                        ease: "power2.in",
-                        pointerEvents: "none"
-                    });
-                    
-                    // Gap between cards
-                    tl.to({}, { duration: gap });
-                });
+                return mostCenteredIndex;
+            }
+
+            // Intersection Observer to detect visible cards
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -20% 0px', // Trigger when card is in center 60% of viewport
+                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                // Find the most centered card among all intersecting entries
+                const visibleCards = entries
+                    .filter(entry => entry.isIntersecting)
+                    .map(entry => ({
+                        index: parseInt(entry.target.dataset.cardIndex, 10),
+                        distance: getDistanceFromCenter(entry.target),
+                        ratio: entry.intersectionRatio
+                    }));
                 
-                // Pin left content (without extra spacing)
-                const leftContent = section.querySelector('.vertical-carousel-left');
-                if (leftContent) {
-                    ScrollTrigger.create({
-                        trigger: section,
-                        start: "top top",
-                        end: () => "+=" + (cards.length * 1200),
-                        pin: leftContent,
-                        pinSpacing: false
+                if (visibleCards.length > 0) {
+                    // Sort by distance from center, then by intersection ratio
+                    visibleCards.sort((a, b) => {
+                        if (Math.abs(a.distance - b.distance) < 50) {
+                            // If distances are close, prefer higher intersection ratio
+                            return b.ratio - a.ratio;
+                        }
+                        return a.distance - b.distance;
                     });
+                    
+                    updateActiveBullet(visibleCards[0].index);
                 }
+            }, observerOptions);
+
+            // Observe all cards
+            cards.forEach(card => {
+                observer.observe(card);
             });
-        });
-        
-        // Mobile behavior: cards stack normally (no pinning)
-        mm.add("(max-width: 960px)", () => {
-            const sections = document.querySelectorAll('[data-vertical-carousel]');
+
+            // Scroll event handler - finds most centered card
+            let scrollTimeout;
+            let lastActiveIndex = 0;
             
-            sections.forEach((section) => {
-                const cardStack = section.querySelector('.card-stack');
-                const cards = cardStack ? cardStack.querySelectorAll('.card') : [];
-                
-                // Reset cards to normal flow on mobile
-                gsap.set(cards, {
-                    clearProps: "all"
+            function checkCenteredCards() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const mostCenteredIndex = findMostCenteredCard();
+                    // Only update if it's different to avoid unnecessary DOM updates
+                    if (mostCenteredIndex !== lastActiveIndex) {
+                        updateActiveBullet(mostCenteredIndex);
+                        lastActiveIndex = mostCenteredIndex;
+                    }
+                }, 50); // Reduced timeout for more responsive updates
+            }
+
+            window.addEventListener('scroll', checkCenteredCards, { passive: true });
+            
+            // Initial check
+            lastActiveIndex = findMostCenteredCard();
+            updateActiveBullet(lastActiveIndex);
+
+            // Bullet click navigation - smooth scroll to card
+            bullets.forEach((bullet) => {
+                bullet.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetCardId = bullet.dataset.cardId;
+                    const targetCard = document.getElementById(targetCardId);
+                    
+                    if (targetCard) {
+                        // Calculate offset to center the card
+                        const cardRect = targetCard.getBoundingClientRect();
+                        const scrollOffset = window.pageYOffset + cardRect.top - (window.innerHeight / 2) + (cardRect.height / 2);
+                        
+                        window.scrollTo({
+                            top: scrollOffset,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
-                
-                // Ensure card stack allows normal flow
-                if (cardStack) {
-                    gsap.set(cardStack, {
-                        height: "auto",
-                        overflow: "visible"
-                    });
-                }
             });
+
+            // Initial check - find most centered card on load
+            const initialIndex = findMostCenteredCard();
+            updateActiveBullet(initialIndex);
+            lastActiveIndex = initialIndex;
         });
     }
     
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
-            // Wait a bit for GSAP to load if it's loaded via CDN
-            setTimeout(initVerticalCarousel, 100);
+            setTimeout(initVerticalCarouselScroll, 100);
         });
     } else {
-        // DOM already loaded
-        setTimeout(initVerticalCarousel, 100);
+        setTimeout(initVerticalCarouselScroll, 100);
     }
     
-    // Also try to initialize after a delay in case GSAP loads later
-    setTimeout(initVerticalCarousel, 500);
+    // Re-initialize on resize (to handle mobile/desktop switching)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            initVerticalCarouselScroll();
+        }, 250);
+    });
 })();
-

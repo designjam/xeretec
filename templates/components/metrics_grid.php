@@ -56,7 +56,8 @@ if ($content && $metrics):
                   a 15.9155 15.9155 0 0 1 0 31.831
                   a 15.9155 15.9155 0 0 1 0 -31.831" />
                       <path class="circle"
-                        stroke-dasharray="<?php echo esc_html($metric['value']); ?>, 100"
+                        data-value="<?php echo esc_html($metric['value']); ?>"
+                        stroke-dasharray="0, 100"
                         d="M18 2.0845
                   a 15.9155 15.9155 0 0 1 0 31.831
                   a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -78,6 +79,34 @@ if ($content && $metrics):
               </div>
             <?php endforeach; ?>
           </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const parts = document.querySelectorAll('.circular-chart');
+
+              const io = new IntersectionObserver((entries, observer) => {
+                for (const entry of entries) {
+                  if (!entry.isIntersecting) continue;
+
+                  const circle = entry.target.querySelector('.circle');
+                  if (!circle) continue;
+                  
+                  const finalValue = circle.getAttribute('data-value');
+                  if (!finalValue) continue;
+                  
+                  setTimeout(() => {
+                    circle.style.strokeDasharray = `${finalValue}, 100`;
+                    requestAnimationFrame(() => {
+                      entry.target.classList.add('is-animating');
+                    });
+                  }, 500);
+                  
+                  observer.unobserve(entry.target);
+                }
+              }, { threshold: 0.2 });
+
+              parts.forEach(p => io.observe(p));
+            });
+          </script>
         <?php endif; ?>
 
         <div class="flex justify-center lg:hidden lg:justify-start">

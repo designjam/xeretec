@@ -37,30 +37,6 @@ for(let i = 0; i < titleElements.length; i++){
     titleObserver.observe(titleElements[i]);
 }
 
-//MMenu
-
-const menu = new MmenuLight(
-    document.querySelector( "#menu-location-primary_navigation_mobile" ),
-    "(max-width: 1100px)"
-);
-
-const navigation = menu.navigation({
-    // options
-});
-
-const drawer = menu.offcanvas({
-    position: "right"
-});
-
-document.addEventListener(
-    "DOMContentLoaded", () => {
-        document.querySelector( "button[href='#primary-navigation-mobile']" ).addEventListener( "click", ( event ) => {
-                event.preventDefault();
-                drawer.open();
-            });
-
-        
-    }
-);
+// MMenu removed - now using standalone mobile menu component
 
 

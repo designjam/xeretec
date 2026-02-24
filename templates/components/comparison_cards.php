@@ -46,7 +46,7 @@ if ($comparison_cards):
                                 <div class="flex flex-col flex-grow p-10 group-hover:bg-brand-dark group-hover:text-white' : ''; ?>">
                                     
                                     <?php if ($heading): ?>
-                                        <h3 class="font-bold mb-4 text-[38px] <?php echo $has_image ? 'group-hover:text-white' : 'text-purple-900'; ?>">
+                                        <h3 class="font-bold mb-4 text-[38px] group-hover:text-white text-purple-900">
                                             <?php echo esc_html($heading); ?>
                                         </h3>
                                     <?php endif; ?>

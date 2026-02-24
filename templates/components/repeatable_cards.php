@@ -37,7 +37,7 @@ if ($repeatable_cards):
                     <?php if ($columns === 'two'): ?>
                         <?php foreach ($repeatable_cards as $card): ?>
                             <?php if ($card['link']): ?>
-                                <a href="<?php echo esc_url($card['link']['url']); ?>" class="block flex gap-10 p-12 shadow-xl transition cursor-pointer rounded-10 hover:shadow-xl text-dark group card-gradient"
+                                <a href="<?php echo esc_url($card['link']['url']); ?>" class="block flex gap-10 p-12 shadow-xl transition cursor-pointer rounded-10 hover:shadow-xl text-dark group card-gradient">
                             <?php else: ?>
                                 <div class="flex gap-8 p-8 shadow-xl transition lg:p-12 lg:gap-10 rounded-10 hover:shadow-xl text-dark" style="background: linear-gradient(180deg, #FFFFFF 0%, #EDEEF5 100%);">
                             <?php endif; ?>
@@ -71,7 +71,7 @@ if ($repeatable_cards):
                             <?php if ($card['link']): ?>
                                 <a href="<?php echo esc_url($card['link']['url']); ?>" class="block flex flex-col gap-6 p-12 bg-white transition cursor-pointer shadow-custom rounded-20 group hover:shadow-xl text-dark card-gradient">
                             <?php else: ?>
-                                <div class="flex flex-col gap-6 p-12 shadow-xl transition rounded-20 hover:shadow-xl text-dark">
+                                <div class="flex flex-col gap-6 p-12 shadow-xl transition rounded-20 hover:shadow-xl text-dark card-gradient">
                             <?php endif; ?>
                                 <?php if ($card['icon']): ?>
                                     <img src="<?php echo esc_url($card['icon']['url']); ?>" alt="<?php echo esc_attr($card['icon']['alt']); ?>" class="w-20 h-20 group-hover:invert group-hover:brightness-0">

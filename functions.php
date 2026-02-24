@@ -6,6 +6,7 @@ $theme_includes = array(
   'lib/wysiwyg.php',                    // Editor helpers
   'lib/scripts.php',                    // Configuration
   'lib/nav.php',                        // Bootstrap Nav Walker
+  'lib/mobile-menu-walker.php',        // Mobile Menu Walker
   'lib/media.php',                      // Handle the uploaded medias
   'lib/admin.php',                      // Admin pages utilities
   'lib/project.php',                    // Project-specific functions

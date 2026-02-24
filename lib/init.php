@@ -8,6 +8,7 @@ function setup() {
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
   register_nav_menus([
     'primary_navigation' => __('Primary Navigation', 'theme'),
+    'primary_navigation_mobile' => __('Primary Navigation Mobile', 'theme'),
     'legal_navigation'   => __('Legal Navigation', 'theme'),
     'footer_navigation'   => __('Footer Navigation', 'theme')
   ]);

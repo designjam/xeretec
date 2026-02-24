@@ -165,6 +165,28 @@
                     "parent_repeater": "field_application_cards"
                 },
                 {
+                    "key": "field_6977aa6618269",
+                    "label": "Hover",
+                    "name": "hover",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "rows": "",
+                    "placeholder": "",
+                    "new_lines": "",
+                    "parent_repeater": "field_application_cards"
+                },
+                {
                     "key": "field_6953c9054b916",
                     "label": "Link",
                     "name": "link",
@@ -204,5 +226,5 @@
     "description": "Application Cards component fields - cloned into flexible content",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1767098657
+    "modified": 1769450101
 }

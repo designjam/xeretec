@@ -1,6 +1,7 @@
 /**
  * Application Cards Component
  * Handles hover interactions to swap center image
+ * Image remains changed until another card is hovered
  */
 
 (function() {
@@ -26,6 +27,9 @@
             // Store the default image source
             const defaultImageSrc = centerImage.getAttribute('src');
             
+            // Track currently active card
+            let activeCard = null;
+            
             // Add hover event listeners to each card
             cards.forEach(function(card) {
                 const cardImageSrc = card.getAttribute('data-card-image');
@@ -34,24 +38,27 @@
                 if (cardImageSrc) {
                     // Mouse enter - change center image
                     card.addEventListener('mouseenter', function() {
-                        centerImage.style.opacity = '0';
+                        // If this card is already active, do nothing
+                        if (activeCard === card) {
+                            return;
+                        }
+                        
+                        // Set this card as active
+                        activeCard = card;
+                        
+                        // Fade out current image
+                        centerImage.classList.remove('opacity-100');
+                        centerImage.classList.add('opacity-0');
                         
                         // Wait for fade out, then change image and fade in
                         setTimeout(function() {
+                            // Update image source
                             centerImage.setAttribute('src', cardImageSrc);
-                            centerImage.style.opacity = '1';
-                        }, 150); // Half of transition duration
-                    });
-                    
-                    // Mouse leave - restore default image
-                    card.addEventListener('mouseleave', function() {
-                        centerImage.style.opacity = '0';
-                        
-                        // Wait for fade out, then restore default image and fade in
-                        setTimeout(function() {
-                            centerImage.setAttribute('src', defaultImageSrc);
-                            centerImage.style.opacity = '1';
-                        }, 150); // Half of transition duration
+                            
+                            // Fade in new image
+                            centerImage.classList.remove('opacity-0');
+                            centerImage.classList.add('opacity-100');
+                        }, 250); // Half of transition duration (500ms)
                     });
                 }
             });

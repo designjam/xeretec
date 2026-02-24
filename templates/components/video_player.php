@@ -27,12 +27,12 @@ if ($final_video_url):
   if (strpos($final_video_url, 'youtube.com') !== false || strpos($final_video_url, 'youtu.be') !== false) {
     preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $final_video_url, $matches);
     if (!empty($matches[1])) {
-      $embed_url = 'https://www.youtube.com/embed/' . $matches[1];
+      $embed_url = 'https://www.youtube.com/embed/' . $matches[1] . '?rel=0';
     }
   } elseif (strpos($final_video_url, 'vimeo.com') !== false) {
     preg_match('/vimeo.com\/(\d+)/', $final_video_url, $matches);
     if (!empty($matches[1])) {
-      $embed_url = 'https://player.vimeo.com/video/' . $matches[1];
+      $embed_url = 'https://player.vimeo.com/video/' . $matches[1] . '?dnt=1&byline=0&portrait=0&title=0';
     }
   }
 ?>

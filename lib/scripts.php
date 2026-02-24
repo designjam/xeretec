@@ -24,9 +24,8 @@ function assets() {
     // Global WP inline styles not in use
     wp_dequeue_style( 'global-styles' );
 
-    // mmenu
-    wp_enqueue_style( 'mmenu_light_css', get_template_directory_uri() . '/css/mmenu-light.css' );
-    wp_enqueue_script( 'mmenu_light_js', get_template_directory_uri() . '/js/mmenu-light.js', array('jquery'), null, true );
+    // Mobile Menu
+    wp_enqueue_script( 'mobile_menu_js', get_template_directory_uri() . '/js/mobile-menu.js', null, null, true );
 
     // Custom animation
     wp_enqueue_script( 'observer_js', get_template_directory_uri() . '/js/observer.js', null, null, true );
@@ -35,7 +34,7 @@ function assets() {
     wp_enqueue_style( 'styles', get_template_directory_uri() . '/css/global-styles.min.css' );
     
     // Custom Global Styles - loads after main stylesheet for overrides
-    wp_enqueue_style( 'custom-global', get_template_directory_uri() . '/css/custom-global.css', array('styles'), '1.0.0' );
+    wp_enqueue_style( 'custom-global', get_template_directory_uri() . '/css/custom-global.css', array('styles'), '1.0.1' );
     
     wp_enqueue_script( 'scripts_js', get_template_directory_uri() . '/js/global-scripts.min.js', array('jquery'), null, true );
 
@@ -57,7 +56,7 @@ add_action('wp_enqueue_scripts', 'assets');
 
 function add_defer_attribute($tag, $handle) {
     // An array of the script handles where we want to add 'defer'
-    $scripts_to_defer = array('mmenu_light_js', 'observer_js', 'scripts_js', 'home_js', 'team_js', 'components_js', 'component_faqs', 'component_carousel', 'component_video', 'component_form', 'component_solutions', 'component_product-detail', 'component_testimonials', 'component_vertical-tabs', 'component_vertical-carousel', 'gsap', 'gsap-scrolltrigger');
+    $scripts_to_defer = array('mobile_menu_js', 'observer_js', 'scripts_js', 'home_js', 'team_js', 'components_js', 'component_faqs', 'component_carousel', 'component_video', 'component_form', 'component_solutions', 'component_product-detail', 'component_testimonials', 'component_vertical-tabs', 'component_vertical-carousel', 'gsap', 'gsap-scrolltrigger');
 
     // If the handle matches, add the 'defer' attribute
     foreach($scripts_to_defer as $defer_script) {
@@ -142,6 +141,7 @@ function enqueue_component_assets() {
         'vertical_tabs' => 'vertical-tabs',
         'vertical_carousel' => 'vertical-carousel',
         'application_cards' => 'application-cards',
+        'testimonial_grid' => 'testimonials',
         
         // Global components (note the 'global_' prefix)
         'global_customer_carousel' => 'carousel',

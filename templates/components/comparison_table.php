@@ -30,7 +30,7 @@ if ($products && $features):
         // Mobile: fixed widths for scrolling
         $mobile_grid_template = 'grid-template-columns: ' . $feature_col_width . 'px repeat(' . $product_count . ', ' . $product_col_min_width . 'px);';
         // Desktop: flexible widths
-        $desktop_grid_template = 'grid-template-columns: 350px repeat(' . $product_count . ', minmax(150px, 1fr));';
+        $desktop_grid_template = 'grid-template-columns: 300px repeat(' . $product_count . ', minmax(150px, 1fr));';
         $min_width = $feature_col_width + ($product_count * $product_col_min_width);
         $table_id = 'comparison-table-' . $component_id;
       ?>
@@ -54,9 +54,9 @@ if ($products && $features):
             <div class="comparison-content-wrapper md:w-auto" style="width: <?php echo esc_attr($min_width); ?>px; min-width: <?php echo esc_attr($min_width); ?>px;">
               <!-- Header Row -->
               <div class="grid comparison-grid-row">
-              <div class="sticky left-0 z-10 px-6 py-4 font-bold text-left text-white border-b border-white bg-[#20284B] lg:bg-transparent"></div>
+              <div class="sticky left-0 z-10 px-6 py-4 font-bold text-left text-white border-b border-bottom-0 border-white bg-[#20284B] lg:bg-transparent"></div>
               <?php foreach ($products as $index => $product): ?>
-                <div class="px-6 py-4 font-bold text-center text-white bg-transparent border border-white <?php echo $index === $product_count - 1 ? 'border-r-0' : ''; ?>">
+                <div class="px-6 py-4 font-bold text-center text-white bg-transparent border border-white <?php echo $index === 0 ? 'rounded-tl-3xl' : ''; ?> <?php echo $index === $product_count - 1 ? 'border-r-0 rounded-tr-3xl' : ''; ?>">
                   <?php echo esc_html($product['product_name']); ?>
                 </div>
               <?php endforeach; ?>
@@ -77,7 +77,7 @@ if ($products && $features):
               }
               ?>
               <div class="grid comparison-grid-row border-b border-gray-200 <?php echo $feature_index === count($features) - 1 ? 'border-b-0' : ''; ?>">
-                <div class="sticky left-0 z-10 px-6 py-4 text-[14px] lg:text-[18px] font-semibold text-gray-800 bg-gray-300 border-left-0">
+                <div class="sticky left-0 z-10 px-6 py-4 text-[14px] lg:text-[18px] font-semibold text-gray-800 bg-gray-300 border-left-0 <?php echo $feature_index === 0 ? 'rounded-tl-3xl' : ''; ?> <?php echo $feature_index === count($features) - 1 ? 'rounded-bl-3xl' : ''; ?>">
                   <?php echo esc_html($feature['feature_name']); ?>
                 </div>
                 <?php foreach ($products as $index => $product): 
@@ -98,10 +98,10 @@ if ($products && $features):
             <?php endforeach; ?>
             
             <!-- Footer Row -->
-            <div class="grid border-t border-white comparison-grid-row">
+            <div class="grid border-white comparison-grid-row">
               <div class="sticky left-0 z-10 px-6 py-4 bg-[#20284B] lg:bg-transparent"></div>
               <?php foreach ($products as $index => $product): ?>
-                <div class="px-6 py-4 text-center border border-white bg-transparent  <?php echo $index === $product_count - 1 ? 'border-r-0' : ''; ?>">
+                <div class="px-6 py-4 text-center border border-white bg-transparent  <?php echo $index === 0 ? 'rounded-bl-3xl' : ''; ?> <?php echo $index === $product_count - 1 ? 'border-r-0 rounded-br-3xl' : ''; ?>">
                   <?php if (!empty($product['view_product_link'])): 
                     $link = $product['view_product_link'];
                   ?>

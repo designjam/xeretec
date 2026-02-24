@@ -46,6 +46,9 @@
                 var profileImageSrc = testimonialData.profile || '';
                 
                 if (profileImageSrc && $profileSection.length) {
+                    // Add has-profile class to show profile section (respects Tailwind breakpoints)
+                    $profileSection.addClass('has-profile');
+                    
                     // Show profile section and update content
                     var profileName = testimonialData.profile_name || testimonialData.name || '';
                     var profileRole = testimonialData.profile_role || '';
@@ -78,13 +81,10 @@
                             $image.fadeIn(200);
                         });
                     }
-                    
-                    // Show profile section if hidden
-                    $profileSection.fadeIn(200);
                 } else {
-                    // Hide profile section if no profile image
+                    // Remove has-profile class to hide profile section (respects Tailwind breakpoints)
                     if ($profileSection.length) {
-                        $profileSection.fadeOut(200);
+                        $profileSection.removeClass('has-profile');
                     }
                 }
                 

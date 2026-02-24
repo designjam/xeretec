@@ -19,9 +19,21 @@
                         By clicking Sign Up you're confirming that you agree with our <strong>Terms and Conditions</strong>.
                     </p>
                 </form> -->
-                <script src="https://js-eu1.hsforms.net/forms/embed/139694148.js" defer></script>
-                <div class="hs-form-frame" data-region="eu1" data-form-id="e663fb1d-78d7-4382-a2dc-c84fef13096b" data-portal-id="139694148"></div>
-                <p class="footer__newsletter-disclaimer">
+                <!--script src="https://js-eu1.hsforms.net/forms/embed/139694148.js" defer></script-->
+                <!--div class="hs-form-frame" data-region="eu1" data-form-id="e663fb1d-78d7-4382-a2dc-c84fef13096b" data-portal-id="139694148"></div-->
+                
+<div class="hs-form-wrap hs-form-wrap--newsletter">
+<script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
+<script>
+  hbspt.forms.create({
+    portalId: "139694148",
+    formId: "8927a1a9-0fba-4465-8201-7ad2e247c54b",
+    region: "eu1"
+  });
+</script>
+</div>
+				
+				<p class="footer__newsletter-disclaimer">
                         By clicking Sign Up you're confirming that you agree with our <a href="/terms/"><strong>Terms and Conditions</strong></a>.
                     </p>
             </div>
@@ -121,8 +133,33 @@
             </div>
         </div>
     <?php endif; ?>
-
-
+    <div class="col social-icons">
+                        <?php if ( get_field('fld_theme_email_us', 'options') ) : ?>
+                            <div class="social-icons__icon">
+                                <span><?php _e('Email Us', 'Rouge'); ?></span>
+                                <a href="mailto:<?php echo get_field('fld_theme_email_us', 'options'); ?>" name="Email us" class="social social__email"><?php _e('Email us', 'Rouge'); ?></a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ( get_field('fld_theme_store', 'options') ) : ?>
+                            <div class="social-icons__icon">
+                                <span><?php _e('Supplies Store', 'Rouge'); ?></span>
+                                <a href="<?php echo get_field('fld_theme_store', 'options'); ?>" name="Visit our supplies store" class="social social__store" target="_blank"><?php _e('Visit our supplies store', 'Rouge'); ?></a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if( have_rows('rpt_theme_social_account', 'options') ): ?>
+                            <div class="social-icons__icon">
+                                <span><?php _e('Follow Us', 'Rouge'); ?></span>
+                                <div>
+                                    <?php while( have_rows('rpt_theme_social_account', 'options') ): the_row(); ?>
+                                        <a href="<?php echo get_sub_field('fld_theme_social_link'); ?>" target="_blank" name="Follow us on <?php echo get_sub_field('fld_theme_social_account'); ?>" class="social social__<?php echo get_sub_field('fld_theme_social_account'); ?>">
+                                            <?php echo get_sub_field('fld_theme_social_account'); ?>
+                                        </a>
+                                    <?php endwhile; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+  <button class="close mobile-close" role="button" aria-label="Close Menu"></button>                     
 </footer>
 
 <?php wp_footer(); ?>

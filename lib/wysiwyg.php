@@ -8,7 +8,7 @@ function insert_pull_out_shortcode($atts, $content = null) {
     ), $atts));
 
     return '
-        <div class="pull-out ' . $bg . '">
+        <div class="pull-out' . $bg . '">
             <h4>' . $content . '</h4>
             <a class="link" href="' . $url . '">' . $link_title . '</a>
         </div>
@@ -114,33 +114,41 @@ function mce_before_init_insert_formats( $init_array ) {
     */
 
         array(
-          'title' => 'Label Heading',
+          'title' => 'Section heading',
+          'selector' => 'p,h1,h2,h3,h4,h5,h6',
+          'classes' => 'section-heading',
+        ),
+
+        array(
+          'title' => 'Caption',
           'selector' => 'p,h1,h2,h3,h4,h5,h6',
           'classes' => 'label-heading',
         ),
 
         array(
-            'title' => 'Section heading',
-            'selector' => 'p,h1,h2,h3,h4,h5,h6',
-            'classes' => 'section-heading',
+          'title' => 'Small Text',
+          'selector' => 'p,strong',
+          'classes' => 'small',
         ),
 
         array(
-            'title' => 'Small Text',
-            'selector' => 'p,strong',
-            'classes' => 'small',
+          'title' => 'Primary colour',
+          'inline' => 'span',
+          'classes' => 'text-accent',
+          'wrapper' => false
         ),
 
         array(
-            'title' => 'Primary colour',
-            'selector' => 'p,strong',
-            'classes' => 'style style--primary',
+          'title' => 'Secondary colour',
+          'inline' => 'span',
+          'classes' => 'text-brand',
+          'wrapper' => false
         ),
 
         array(
-            'title' => 'Secondary colour',
-            'selector' => 'p,strong',
-            'classes' => 'style style--secondary',
+          'title' => 'Bullet points with icons',
+          'selector' => 'ul',
+          'classes' => 'bullets',
         ),
     );
 

@@ -2,53 +2,121 @@
 
 /**
  * Vertical Carousel Component
- * Uses Slick Carousel with vertical orientation
+ * Uses CSS sticky positioning and Intersection Observer for natural scrolling
  */
 
 $content = get_sub_field('content');
 $repeatable_cards = get_sub_field('repeatable_cards');
 
 if ($content && $repeatable_cards):
-  $component_id = 'vertical-carousel-' . get_row_index();
+  $component_id = 'vertical-carousel-scroll-' . get_row_index();
 ?>
   <style>
-
-    .cardStack {
+    /* Scoped styles with new class names */
+    .vc-scroll-section {
       position: relative;
-      min-height: 640px;
-      border-radius: 20px;
-      margin-right: 80px;
+      overflow: visible !important; /* Override overflow-hidden class */
+      padding-top: 10vh; /* Add top padding so sticky doesn't activate too early */
+      padding-bottom: 10vh; /* Add bottom padding */
     }
 
-    .card {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      will-change: transform, opacity;
+    .vc-scroll-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      min-height: 80vh;
+      align-items: start; /* Important for sticky to work */
     }
 
-    .vertical-nav {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
+    @media (min-width: 1024px) {
+      .vc-scroll-container {
+        grid-template-columns: 1fr 1fr 80px; /* Left content | Cards | Navigation */
+        gap: 0;
+        align-items: start; /* Important for sticky to work */
+      }
+    }
+
+    /* Left content - sticky pinned */
+    .vc-scroll-left {
+      position: relative;
+    }
+
+    @media (min-width: 1024px) {
+      .vc-scroll-left {
+        position: -webkit-sticky; /* Safari support */
+        position: sticky;
+        top: 20vh; /* Stick when 20vh from top - allows natural scroll in first */
+        align-self: start;
+        height: fit-content;
+        max-height: calc(100vh - 4rem); /* Prevent overflow */
+        overflow: hidden;
+      }
+    }
+
+    /* Cards column - natural document flow */
+    .vc-scroll-cards-column {
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .vc-scroll-cards-column {
+        padding-left: 100px;
+      }
+    }
+
+    /* Card stack - natural document flow */
+    .vc-scroll-card-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+      position: relative;
+    }
+
+    /* Individual cards - natural flow */
+    .vc-scroll-card {
+      position: relative;
+      width: 100%;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Navigation bullets column - sticky pinned */
+    .vc-scroll-nav-column {
+      position: relative;
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .vc-scroll-nav-column {
+        display: block;
+        position: -webkit-sticky; /* Safari support */
+        position: sticky;
+        top: 45vh; /* Stick when 20vh from top - allows natural scroll in first */
+        align-self: start;
+        height: fit-content;
+      }
+    }
+
+    .vc-scroll-nav {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
-      z-index: 10;
+      gap: 1.5rem;
+      position: relative;
       pointer-events: none;
     }
 
-    .vertical-nav-line {
+    .vc-scroll-nav-line {
       position: absolute;
       width: 2px;
       height: calc(100% - 20px);
       background: rgba(255, 255, 255, 0.3);
       top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
-    .vertical-nav-bullet {
+    .vc-scroll-nav-bullet {
       width: 16px;
       height: 16px;
       border-radius: 50%;
@@ -61,87 +129,146 @@ if ($content && $repeatable_cards):
       pointer-events: all;
     }
 
-    .vertical-nav-bullet.active {
+    .vc-scroll-nav-bullet.active {
       background: white;
       border-color: white;
     }
 
-    /* Mobile: no pinning, just stack normally */
-    @media (max-width: 1024px) {
+    /* Card styling */
+    .vc-scroll-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 0;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EDEEF5 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
 
-      .cardStack {
-        height: auto;
-        overflow: visible;
-        border-radius: 0;
-        margin-right: 0px;
+    @media (min-width: 1024px) {
+      .vc-scroll-card-content {
+        gap: 2.5rem;
       }
+    }
 
-      .card {
-        position: relative;
-        inset: auto;
-      }
+    .vc-scroll-card-content:hover {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
 
-      .vertical-nav {
+    .vc-scroll-card-image {
+      height: 300px;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+    }
+
+    .vc-scroll-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .vc-scroll-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2.5rem;
+      padding-top: 1rem;
+    }
+
+    .vc-scroll-card-title {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .vc-scroll-card-description {
+      margin: 0;
+      color: #333;
+    }
+
+    /* Mobile: no pinning, normal flow */
+    @media (max-width: 1023px) {
+      .vc-scroll-nav-column {
         display: none;
+      }
+      
+      .vc-scroll-left {
+        position: relative;
+        transform: none;
       }
     }
   </style>
 
-
-  <section class="overflow-hidden relative py-32 text-white bg-dark" id="vertical-carousel">
-    <div class="container mx-auto grid min-h-[80vh] items-center gap-48 grid-cols-1 lg:grid-cols-2">
-
+  <section class="overflow-hidden relative text-white component-wrapper bg-dark vc-scroll-section" id="<?php echo esc_attr($component_id); ?>">
+    <div class="container mx-auto vc-scroll-container">
+      
       <?php if ($content): ?>
-        <div class="left">
+        <div class="vc-scroll-left">
           <?php echo wp_kses_post($content); ?>
           <div class="flex" style="padding-top: 20px;">
-              <?php get_template_part('templates/components/snippets/links'); ?>
-            </div>
+            <?php get_template_part('templates/components/snippets/links'); ?>
+          </div>
         </div>
       <?php endif; ?>
+
       <?php if ($repeatable_cards): ?>
-        <div class="relative">
-          <!-- Vertical Navigation Bullets -->
-          <div class="vertical-nav" id="verticalNav">
-            <div class="vertical-nav-line"></div>
+        <!-- Cards Column -->
+        <div class="vc-scroll-cards-column">
+          <div class="vc-scroll-card-stack" id="vc-scroll-card-stack-<?php echo esc_attr($component_id); ?>">
             <?php foreach ($repeatable_cards as $index => $card): ?>
-              <div class="vertical-nav-bullet <?php echo $index === 0 ? 'active' : ''; ?>" data-index="<?php echo $index; ?>"></div>
+              <div class="vc-scroll-card" 
+                   id="vc-card-<?php echo esc_attr($component_id); ?>-<?php echo $index; ?>"
+                   data-card-index="<?php echo $index; ?>">
+                
+                <?php if ($card['link']): ?>
+                  <a href="<?php echo esc_url($card['link']['url']); ?>" class="block vc-scroll-card-content text-dark group">
+                <?php else: ?>
+                  <div class="vc-scroll-card-content text-dark">
+                <?php endif; ?>
+
+                  <?php if ($card['image']): ?>
+                    <div class="vc-scroll-card-image">
+                      <img src="<?php echo esc_url($card['image']['url']); ?>" 
+                           alt="<?php echo esc_attr($card['image']['alt']); ?>">
+                    </div>
+                  <?php endif; ?>
+
+                  <div class="vc-scroll-card-body">
+                    <?php if ($card['title']): ?>
+                      <h3 class="vc-scroll-card-title text-brand"><?php echo esc_html($card['title']); ?></h3>
+                    <?php endif; ?>
+
+                    <?php if ($card['description']): ?>
+                      <p class="vc-scroll-card-description"><?php echo esc_html($card['description']); ?></p>
+                    <?php endif; ?>
+
+                    <?php if ($card['link']): ?>
+                      <span class="inline-block button-tertiary">
+                        <?php echo esc_html($card['link']['title'] ?: 'Explore'); ?>
+                      </span>
+                    <?php endif; ?>
+                  </div>
+
+                <?php if ($card['link']): ?>
+                  </a>
+                <?php else: ?>
+                  </div>
+                <?php endif; ?>
+              </div>
             <?php endforeach; ?>
           </div>
-          <div class="cardStack" id="cardStack">
-          <?php foreach ($repeatable_cards as $card): ?>
+        </div>
 
-            <?php if ($card['link']): ?>
-                    <a href="<?php echo esc_url($card['link']['url']); ?>" class=" card !p-0 block flex flex-col gap-6 bg-white shadow-xl transition cursor-pointer rounded-10 hover:shadow-xl text-dark group">
-                  <?php else: ?>
-                    <div class="card !p-0 flex flex-col gap-8 shadow-xl transition lg:gap-10 rounded-10 hover:shadow-xl text-dark" style="background: linear-gradient(180deg, #FFFFFF 0%, #EDEEF5 100%);">
-                  <?php endif; ?>
-                    <?php if ($card['image']): ?>
-                      <div class="h-[300px] rounded-t-10 overflow-hidden">
-                        <img src="<?php echo esc_url($card['image']['url']); ?>" alt="<?php echo esc_attr($card['image']['alt']); ?>" class="object-cover flex-shrink-0 w-full h-full">
-                      </div>
-                    <?php endif; ?>
-                    <div class="flex flex-col gap-6 p-10 pt-4">
-
-                      <?php if ($card['title']): ?>
-                        <h3 class="text-[30px] font-bold text-brand"><?php echo esc_html($card['title']); ?></h3>
-                      <?php endif; ?>
-
-                      <?php if ($card['description']): ?>
-                        <p class="!m-0 "><?php echo esc_html($card['description']); ?></p>
-                      <?php endif; ?>
-
-                      <?php if ($card['link']): ?>
-                        <span class="inline-block button-tertiary">
-                          <?php echo esc_html($card['link']['title'] ?: 'Explore'); ?>
-                        </span>
-                      <?php endif; ?>
-                    </div>
-                  <?php if ($card['link']): ?>
-                    </a>
-                  <?php else: ?>
-                    </div>
-                  <?php endif; ?>
+        <!-- Navigation Bullets Column -->
+        <div class="vc-scroll-nav-column">
+          <div class="vc-scroll-nav" id="vc-scroll-nav-<?php echo esc_attr($component_id); ?>">
+            <div class="vc-scroll-nav-line"></div>
+            <?php foreach ($repeatable_cards as $index => $card): ?>
+              <div class="vc-scroll-nav-bullet <?php echo $index === 0 ? 'active' : ''; ?>" 
+                   data-index="<?php echo $index; ?>"
+                   data-card-id="vc-card-<?php echo esc_attr($component_id); ?>-<?php echo $index; ?>"></div>
             <?php endforeach; ?>
           </div>
         </div>
@@ -149,36 +276,26 @@ if ($content && $repeatable_cards):
     </div>
   </section>
 
-
-  <!-- GSAP -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
   <script>
-    gsap.registerPlugin(ScrollTrigger);
+  (function() {
+    'use strict';
+    
+    function initVerticalCarouselScroll() {
+      // Only run on desktop (min-width: 1024px)
+      if (window.innerWidth < 1024) {
+        return;
+      }
 
-    const mm = gsap.matchMedia();
+      const section = document.getElementById('<?php echo esc_js($component_id); ?>');
+      if (!section) return;
 
-    mm.add("(min-width: 1024px)", () => {
-      const section = document.querySelector("#vertical-carousel");
-      const cards = gsap.utils.toArray("#cardStack .card");
-      const bullets = gsap.utils.toArray("#verticalNav .vertical-nav-bullet");
+      const cards = section.querySelectorAll('.vc-scroll-card');
+      const bullets = section.querySelectorAll('.vc-scroll-nav-bullet');
 
-      // Start hidden/off-screen (below)
-      gsap.set(cards, {
-        opacity: 0,
-        yPercent: 35, // start below the visible area
-        pointerEvents: "none"
-      });
-
-			gsap.set(cards[0], {
-				opacity: 1,
-				yPercent: 0,
-				pointerEvents: "auto"
-			});
+      if (cards.length === 0 || bullets.length === 0) return;
 
       // Function to update active bullet
-      const updateActiveBullet = (index) => {
+      function updateActiveBullet(index) {
         bullets.forEach((bullet, i) => {
           if (i === index) {
             bullet.classList.add('active');
@@ -186,176 +303,134 @@ if ($content && $repeatable_cards):
             bullet.classList.remove('active');
           }
         });
-      };
+      }
 
-      // Initialize first bullet as active
-      updateActiveBullet(0);
+      // Function to get distance from viewport center
+      function getDistanceFromCenter(card) {
+        const rect = card.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const cardCenter = rect.top + rect.height / 2;
+        const viewportCenter = viewportHeight / 2;
+        
+        return Math.abs(cardCenter - viewportCenter);
+      }
 
-      // Pinned section timeline: each card in -> hold -> out
-      const hold = 0.5; // increase for longer "pin" per card
-      const inDur = 0.35; // entrance speed
-      const outDur = 0.35; // exit speed
-      const gap = 0.15; // small gap between cards
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => "+=" + (cards.length * 900), // increase to slow down overall
-          scrub: true,
-          pin: true,
-          anticipatePin: 1,
-          // markers: true
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            // Calculate which card should be active based on progress
-            const progress = self.progress;
-            const cardProgress = progress * cards.length;
-            const activeIndex = Math.min(Math.floor(cardProgress), cards.length - 1);
-            updateActiveBullet(activeIndex);
+      // Function to find the most centered card
+      function findMostCenteredCard() {
+        let mostCenteredIndex = 0;
+        let smallestDistance = Infinity;
+        
+        cards.forEach((card, index) => {
+          const rect = card.getBoundingClientRect();
+          // Only consider cards that are visible in viewport
+          if (rect.bottom > 0 && rect.top < window.innerHeight) {
+            const distance = getDistanceFromCenter(card);
+            if (distance < smallestDistance) {
+              smallestDistance = distance;
+              mostCenteredIndex = index;
+            }
           }
-        }
-      });
-
-      cards.forEach((card, index) => {
-        tl.to(card, {
-          opacity: 1,
-          yPercent: 0,
-          pointerEvents: "auto",
-          duration: inDur,
-          ease: "power2.out",
         });
-
-        // "Pinned" hold moment (this is effectively the delay)
-        tl.to({}, {
-          duration: hold,
-        });
-
-				// Don't fade out the last card
-				if (index == cards.length - 1) {
-					return;
-				}
-
-        tl.to(card, {
-          opacity: 0,
-          yPercent: -35, // exit above
-          pointerEvents: "none",
-          duration: outDur,
-          ease: "power2.in",
-        });
-
-        tl.to({}, {
-          duration: gap,
-        });
-      });
-
-      // Keep left side pinned too (without extra spacing)
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: () => "+=" + (cards.length * 1200),
-        pin: section.querySelector(".left"),
-        pinSpacing: false,
-        invalidateOnRefresh: true,
-      });
-
-      // Calculate progress points for each card (when they're fully visible)
-      // Each card sequence: inDur + hold + outDur + gap
-      // We want to target the middle of the "hold" period for each card
-      const cardSequenceDuration = inDur + hold + outDur + gap; // 0.35 + 0.5 + 0.35 + 0.15 = 1.35
-      const lastCardDuration = inDur + hold; // 0.35 + 0.5 = 0.85
-      const totalTimelineDuration = (cards.length - 1) * cardSequenceDuration + lastCardDuration;
-      
-      // Calculate progress point for each card (middle of its hold period)
-      const getCardProgress = (cardIndex) => {
-        let timelineTime;
         
-        if (cardIndex === 0) {
-          // First card: middle of its hold period
-          timelineTime = inDur + hold / 2;
-        } else {
-          // All other cards: after previous cards complete + middle of hold period
-          // Previous cards each take: inDur + hold + outDur + gap
-          const previousCardsDuration = cardIndex * cardSequenceDuration;
-          timelineTime = previousCardsDuration + inDur + hold / 2;
-        }
-        
-        return timelineTime / totalTimelineDuration;
+        return mostCenteredIndex;
+      }
+
+      // Intersection Observer to detect visible cards
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -20% 0px', // Trigger when card is in center 60% of viewport
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
       };
 
-      // Add click handlers to bullets for navigation
+      const observer = new IntersectionObserver((entries) => {
+        // Find the most centered card among all intersecting entries
+        const visibleCards = entries
+          .filter(entry => entry.isIntersecting)
+          .map(entry => ({
+            index: parseInt(entry.target.dataset.cardIndex, 10),
+            distance: getDistanceFromCenter(entry.target),
+            ratio: entry.intersectionRatio
+          }));
+        
+        if (visibleCards.length > 0) {
+          // Sort by distance from center, then by intersection ratio
+          visibleCards.sort((a, b) => {
+            if (Math.abs(a.distance - b.distance) < 50) {
+              // If distances are close, prefer higher intersection ratio
+              return b.ratio - a.ratio;
+            }
+            return a.distance - b.distance;
+          });
+          
+          updateActiveBullet(visibleCards[0].index);
+        }
+      }, observerOptions);
+
+      // Observe all cards
+      cards.forEach(card => {
+        observer.observe(card);
+      });
+
+      // Scroll event handler - finds most centered card
+      let scrollTimeout;
+      let lastActiveIndex = 0;
+      
+      function checkCenteredCards() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          const mostCenteredIndex = findMostCenteredCard();
+          // Only update if it's different to avoid unnecessary DOM updates
+          if (mostCenteredIndex !== lastActiveIndex) {
+            updateActiveBullet(mostCenteredIndex);
+            lastActiveIndex = mostCenteredIndex;
+          }
+        }, 50); // Reduced timeout for more responsive updates
+      }
+
+      window.addEventListener('scroll', checkCenteredCards, { passive: true });
+
+      // Bullet click navigation - smooth scroll to card
       bullets.forEach((bullet, index) => {
-        bullet.addEventListener('click', () => {
-          const scrollTrigger = tl.scrollTrigger;
-          if (scrollTrigger) {
-            // Get the exact progress point for this card
-            const targetProgress = getCardProgress(index);
+        bullet.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetCardId = bullet.dataset.cardId;
+          const targetCard = document.getElementById(targetCardId);
+          
+          if (targetCard) {
+            // Calculate offset to center the card
+            const cardRect = targetCard.getBoundingClientRect();
+            const scrollOffset = window.pageYOffset + cardRect.top - (window.innerHeight / 2) + (cardRect.height / 2);
             
-            // Get the scroll position that corresponds to this progress
-            const start = scrollTrigger.start;
-            const end = scrollTrigger.end;
-            const scrollRange = end - start;
-            const targetScroll = start + (scrollRange * targetProgress);
-            
-            // Scroll to the target position smoothly
             window.scrollTo({
-              top: targetScroll,
+              top: scrollOffset,
               behavior: 'smooth'
             });
           }
         });
       });
+
+      // Initial check - find most centered card on load
+      const initialIndex = findMostCenteredCard();
+      updateActiveBullet(initialIndex);
+      lastActiveIndex = initialIndex;
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVerticalCarouselScroll);
+    } else {
+      initVerticalCarouselScroll();
+    }
+
+    // Re-initialize on resize (to handle mobile/desktop switching)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        initVerticalCarouselScroll();
+      }, 250);
     });
-
-
-    // Mobile version
-    /*mm.add("(max-width: 960px)", () => {
-			const cards = gsap.utils.toArray("#cardStack .card");
-
-			cards.forEach((card, i) => {
-				// Make the first card visible by default
-				if (i === 0) {
-					gsap.set(card, { opacity: 1, yPercent: 0 });
-				} else {
-					gsap.set(card, { opacity: 0, yPercent: 35 });
-				}
-
-				// Pin the card as it reaches the top
-				ScrollTrigger.create({
-					trigger: card,
-					start: "top top",
-					end: "bottom+=50% top", // pin until next card comes in
-					pin: true,
-					pinSpacing: false,
-					onEnter: () => {
-						gsap.to(card, { opacity: 1, yPercent: 0, duration: 0.5, ease: "power2.out" });
-					},
-					onLeaveBack: () => {
-						if (i !== 0) {
-						  gsap.to(card, { opacity: 0, yPercent: 35, duration: 0.5, ease: "power2.in" });
-						}
-					}
-				});
-			});
-    });*/
-
-  // Refresh on resize window
-  window.addEventListener("resize", function() {
-    console.log("resize");
-    window.scrollTo(0,0);
-    clearTimeout(window.resizeTimer);
-    window.resizeTimer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 200);
-  });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    window.scrollTo(0,0);
-    clearTimeout(window.resizeTimer);
-    window.resizeTimer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
-  });
+  })();
   </script>
 
 <?php endif; ?>

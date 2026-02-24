@@ -34,7 +34,7 @@ if ($content):
         <?php else: ?>
           <img src="<?php echo esc_url($background_image['url']); ?>" alt="<?php echo esc_attr($background_image['alt'] ?? ''); ?>" class="object-cover w-full h-full">
         <?php endif; ?>
-        <div class="absolute inset-0 bg-gradient-to-r via-purple-900 opacity-80 from-slate-900 to-slate-900"></div>
+        <!-- <div class="absolute inset-0 bg-gradient-to-r via-purple-900 opacity-80 from-slate-900 to-slate-900"></div> -->
       </div>
     <?php else: ?>
       <!-- Default gradient background if no image -->
@@ -59,16 +59,16 @@ if ($content):
 
       <?php elseif ($hero_type === 'hero_form'): ?>
         <!-- Form Hero: Split Layout with Form on Right -->
-        <div class="grid grid-cols-1 gap-8 items-center lg:grid-cols-2 lg:gap-32">
+        <div class="grid grid-cols-1 gap-8 items-center xl:grid-cols-2 lg:gap-32">
           <!-- Left Content -->
-          <div class="text-white !text-center lg:!text-left ">
+          <div class="text-white !text-center xl:!text-left ">
             <?php if ($content): ?>
               <div class="mb-8 text-white">
                 <?php echo wp_kses_post($content); ?>
               </div>
             <?php endif; ?>
 
-            <div class="flex justify-center lg:justify-start">
+            <div class="flex justify-center xl:justify-start">
               <?php get_template_part('templates/components/snippets/links'); ?>
             </div>
           </div>

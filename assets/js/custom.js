@@ -172,6 +172,15 @@ jQuery(document).ready(function($){
     	
     })
 
+	// Remove site-header--open when mega menu closes (click outside)
+	$(document).on('hidden.bs.dropdown', '.dropdown', function() {
+		// Check if any mega menu dropdowns are still open
+		var hasOpenMenu = $('.dropdown-menu.v2-menu.depth-0.show').length > 0;
+		if (!hasOpenMenu) {
+			$('html').removeClass("site-header--open");
+		}
+	});
+
 	// NAVIGATION
     $('.dropdown-menu').on('click', function (event) {
 	   	event.stopPropagation();

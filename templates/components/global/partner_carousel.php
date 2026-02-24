@@ -2,7 +2,7 @@
 
 /**
  * Partner Carousel Component
- * Uses Slick Carousel
+ * Uses CSS-only continuous scroll (conveyor belt)
  * Note: This is a global component, fields are stored in ACF options page
  */
 
@@ -14,7 +14,7 @@ if ($partners):
   $component_id = 'partner-carousel-' . get_row_index();
 ?>
 
-  <section class="px-0 bg-white component-wrapper" id="<?php echo esc_attr($component_id); ?>" data-carousel>
+  <section class="px-0 bg-white component-wrapper" id="<?php echo esc_attr($component_id); ?>">
     <div class="flex flex-col gap-16 mx-auto">
 
       <?php if ($content): ?>
@@ -24,22 +24,41 @@ if ($partners):
       <?php endif; ?>
 
       <?php if ($partners): ?>
-        <div class="partner-carousel-slick">
-          <?php foreach ($partners as $partner): ?>
-            <div class="px-4">
-              <div class="flex justify-center items-center p-0 h-32 transition">
-                <?php if ($partner['logo']): ?>
-                  <?php if ($partner['link']): ?>
-                    <a href="<?php echo esc_url($partner['link']['url']); ?>" class="block">
-                      <img src="<?php echo esc_url($partner['logo']['url']); ?>" alt="<?php echo esc_attr($partner['logo']['alt'] ?: $partner['name']); ?>" class="object-contain mx-auto max-h-32">
-                    </a>
-                  <?php else: ?>
-                    <img src="<?php echo esc_url($partner['logo']['url']); ?>" alt="<?php echo esc_attr($partner['logo']['alt'] ?: $partner['name']); ?>" class="object-contain mx-auto max-h-32">
+        <div class="partner-carousel-wrapper">
+          <div class="partner-carousel-track">
+            <!-- First set of items -->
+            <?php foreach ($partners as $partner): ?>
+              <div class="partner-carousel-item">
+                <div class="flex justify-center items-center p-0 h-32 transition">
+                  <?php if ($partner['logo']): ?>
+                    <?php if ($partner['link']): ?>
+                      <a href="<?php echo esc_url($partner['link']['url']); ?>" class="block" target="<?php echo esc_attr($partner['link']['target'] ?: '_self'); ?>">
+                        <img src="<?php echo esc_url($partner['logo']['url']); ?>" alt="<?php echo esc_attr($partner['logo']['alt'] ?: $partner['name']); ?>" class="object-contain mx-auto w-auto h-40">
+                      </a>
+                    <?php else: ?>
+                      <img src="<?php echo esc_url($partner['logo']['url']); ?>" alt="<?php echo esc_attr($partner['logo']['alt'] ?: $partner['name']); ?>" class="object-contain mx-auto w-auto h-40">
+                    <?php endif; ?>
                   <?php endif; ?>
-                <?php endif; ?>
+                </div>
               </div>
-            </div>
-          <?php endforeach; ?>
+            <?php endforeach; ?>
+            <!-- Duplicate set for seamless loop -->
+            <?php foreach ($partners as $partner): ?>
+              <div class="partner-carousel-item">
+                <div class="flex justify-center items-center p-0 h-32 transition">
+                  <?php if ($partner['logo']): ?>
+                    <?php if ($partner['link']): ?>
+                      <a href="<?php echo esc_url($partner['link']['url']); ?>" class="block" target="<?php echo esc_attr($partner['link']['target'] ?: '_self'); ?>">
+                        <img src="<?php echo esc_url($partner['logo']['url']); ?>" alt="<?php echo esc_attr($partner['logo']['alt'] ?: $partner['name']); ?>" class="object-contain mx-auto w-auto h-40">
+                      </a>
+                    <?php else: ?>
+                      <img src="<?php echo esc_url($partner['logo']['url']); ?>" alt="<?php echo esc_attr($partner['logo']['alt'] ?: $partner['name']); ?>" class="object-contain mx-auto w-auto h-40">
+                    <?php endif; ?>
+                  <?php endif; ?>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
         </div>
       <?php endif; ?>
 

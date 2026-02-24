@@ -27,7 +27,8 @@ if ($value && $content):
                   a 15.9155 15.9155 0 0 1 0 31.831
                   a 15.9155 15.9155 0 0 1 0 -31.831" />
         <path class="circle"
-          stroke-dasharray="<?php echo esc_html($value); ?>, 100"
+          data-value="<?php echo esc_html($value); ?>"
+          stroke-dasharray="0, 100"
           d="M18 2.0845
                   a 15.9155 15.9155 0 0 1 0 31.831
                   a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -37,6 +38,23 @@ if ($value && $content):
 
       <p class="max-w-4xl text-[24px] lg:text-[32px] !text-center lg:!text-left font-semibold"><?php echo esc_html($content); ?></p>
 
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const chart = document.querySelector('#<?php echo esc_js($component_id); ?> .circular-chart');
+          if (chart) {
+            const circle = chart.querySelector('.circle');
+            if (circle) {
+              const finalValue = circle.getAttribute('data-value');
+              if (finalValue) {
+                circle.style.strokeDasharray = `${finalValue}, 100`;
+                requestAnimationFrame(() => {
+                  chart.classList.add('is-animating');
+                });
+              }
+            }
+          }
+        });
+      </script>
 
     </div>
   </section>

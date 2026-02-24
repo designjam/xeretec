@@ -12,6 +12,11 @@
             var $carousel = $(this);
             var $slider = $carousel.find('.partner-carousel-slick, .customer-carousel-slick, .success-stories-carousel-slick, .latest-resources-carousel-slick, .product-feature-carousel-slick, .comparison-cards-carousel-slick, .comparison-table-carousel-slick, .vertical-carousel-slick');
             
+            // Skip customer and partner carousels (now use CSS-only continuous scroll)
+            if ($slider.hasClass('customer-carousel-slick') || $slider.hasClass('partner-carousel-slick')) {
+                return;
+            }
+            
             // Skip if no slider found
             if ($slider.length === 0) {
                 return;
@@ -71,7 +76,7 @@
                 dots: isSuccessStories || isVerticalCarousel, // Show dots for success stories and vertical carousel
                 arrows: hasArrows, // Show arrows for carousels that need them
                 infinite: !isVerticalCarousel, // Disable infinite scrolling for vertical carousel (has start and end)
-                speed: isContinuousScrolling ? 5000 : 600, // Continuous scrolling speed for partner/customer carousels
+                speed: isContinuousScrolling ? 6000 : 600, // Continuous scrolling speed for partner/customer carousels
                 autoplay: !isSuccessStories && !isLatestResources && !isProductFeature && !isComparisonCards && !isComparisonTable && !isVerticalCarousel, // No autoplay for success stories, latest resources, product feature, comparison cards, comparison table, and vertical carousel
                 autoplaySpeed: isContinuousScrolling ? 0 : 3000, // Continuous scrolling: 0 for seamless transition
                 cssEase: isContinuousScrolling ? 'linear' : 'ease', // Linear easing for continuous scrolling
@@ -222,21 +227,58 @@
                             breakpoint: 1024,
                             settings: {
                                 slidesToShow: 6,
-                                slidesToScroll: 1
+                                slidesToScroll: 1,
+                                autoplaySpeed: 0,
+                                speed: 6000
                             }
                         },
                         {
                             breakpoint: 768,
                             settings: {
                                 slidesToShow: 4,
-                                slidesToScroll: 1
+                                slidesToScroll: 1,
+                                autoplaySpeed: 0,
+                                speed: 6000
                             }
                         },
                         {
                             breakpoint: 640,
                             settings: {
                                 slidesToShow: 2,
-                                slidesToScroll: 1
+                                slidesToScroll: 1,
+                                autoplaySpeed: 0,
+                                speed: 6000
+                            }
+                        }
+                    ];
+                  } else if (isPartnerCarousel) {
+                    
+                    slickSettings.responsive = [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 6,
+                                slidesToScroll: 1,
+                                autoplaySpeed: 0,
+                                speed: 6000
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 4,
+                                slidesToScroll: 1,
+                                autoplaySpeed: 0,
+                                speed: 6000
+                            }
+                        },
+                        {
+                            breakpoint: 640,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1,
+                                autoplaySpeed: 0,
+                                speed: 6000
                             }
                         }
                     ];

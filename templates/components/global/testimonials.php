@@ -42,7 +42,7 @@ if ($testimonials):
             ?>
               <!-- Featured Testimonial Card - Spans multiple columns based on breakpoint -->
               <div class="testimonial-featured featured-testimonial-wrapper">
-                <div class="flex overflow-hidden relative flex-col justify-center items-center p-8 h-full xl:p-20 rounded-10 shadow-custom featured-testimonial-card bg-dark md:p-12">
+                <div class="flex overflow-hidden relative flex-col justify-center items-center p-8 h-full md:p-12 xl:py-6 xl:px-16 rounded-10 shadow-custom featured-testimonial-card bg-dark">
                   <!-- Large Quote Icon -->
                   <div class="absolute top-8 right-8 text-white">
                     <svg class="w-14 h-14 rotate-180" fill="currentColor" viewBox="0 0 24 24">
@@ -58,35 +58,44 @@ if ($testimonials):
                       </p>
                     <?php endif; ?>
 
-                    <!-- Profile Section -->
+                    <!-- Profile Section - Always render structure, JavaScript will show/hide based on data -->
                     <?php 
                     $profile_image = $first_testimonial['profile'] ?? null;
-                    if ($profile_image):
-                      $profile_name = $first_testimonial['profile_name'] ?? $first_testimonial['name'] ?? '';
-                      $profile_role = $first_testimonial['profile_role'] ?? '';
+                    $profile_name = $first_testimonial['profile_name'] ?? $first_testimonial['name'] ?? '';
+                    $profile_role = $first_testimonial['profile_role'] ?? '';
+                    $has_profile_class = $profile_image ? 'has-profile' : '';
                     ?>
-                      <div class="flex gap-4 items-center pt-3 xl:pt-5 testimonial-profile">
-                        <div class="flex-shrink-0 testimonial-image-wrapper">
+                    <div class="flex gap-4 items-center pt-3 xl:hidden 2xl:flex xl:pt-5 testimonial-profile <?php echo esc_attr($has_profile_class); ?>">
+                      <div class="flex-shrink-0 testimonial-image-wrapper">
+                        <?php if ($profile_image): ?>
                           <img src="<?php echo esc_url($profile_image['url']); ?>" 
                                alt="<?php echo esc_attr($profile_image['alt'] ?: ($profile_name ?: 'Profile')); ?>" 
                                class="object-cover w-32 h-32 rounded-full testimonial-image">
-                        </div>
-                        
-                        <div class="flex flex-col testimonial-profile-info">
-                          <?php if ($profile_name): ?>
-                            <h4 class="font-bold text-[16px] xl:text-[18px] mb-0 !m-0 text-white testimonial-name">
-                              <?php echo esc_html($profile_name); ?>
-                            </h4>
-                          <?php endif; ?>
-                          
-                          <?php if ($profile_role): ?>
-                            <p class="text-[14px] xl:text-[16px] text-white/80 p-0 !m-0 testimonial-role">
-                              <?php echo esc_html($profile_role); ?>
-                            </p>
-                          <?php endif; ?>
-                        </div>
+                        <?php else: ?>
+                          <img src="" 
+                               alt="Profile" 
+                               class="object-cover w-32 h-32 rounded-full testimonial-image">
+                        <?php endif; ?>
                       </div>
-                    <?php endif; ?>
+                      
+                      <div class="flex flex-col testimonial-profile-info">
+                        <?php if ($profile_name): ?>
+                          <h4 class="font-bold text-[16px] xl:text-[18px] mb-0 !m-0 text-white testimonial-name">
+                            <?php echo esc_html($profile_name); ?>
+                          </h4>
+                        <?php else: ?>
+                          <h4 class="font-bold text-[16px] xl:text-[18px] mb-0 !m-0 text-white testimonial-name"></h4>
+                        <?php endif; ?>
+                        
+                        <?php if ($profile_role): ?>
+                          <p class="text-[14px] xl:text-[16px] text-white/80 p-0 !m-0 testimonial-role">
+                            <?php echo esc_html($profile_role); ?>
+                          </p>
+                        <?php else: ?>
+                          <p class="text-[14px] xl:text-[16px] text-white/80 p-0 !m-0 testimonial-role"></p>
+                        <?php endif; ?>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
