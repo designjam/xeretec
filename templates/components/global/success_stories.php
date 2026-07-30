@@ -32,15 +32,15 @@ if ($success_stories): ?>
           $image = $story['image'] ?? array();
           $has_link = !empty($link) && !empty($link['url']);
         ?>
-          <div class="p-4">
-            <div class="success-story-slide">
+          <div class="flex p-4 h-full">
+            <div class="flex flex-col flex-1 h-full min-h-0 success-story-slide">
               <?php if ($has_link): ?>
-                <a href="<?php echo esc_url($link['url']); ?>" class="block group">
+                <a href="<?php echo esc_url($link['url']); ?>" class="flex flex-col flex-1 min-h-0 group">
                 <?php else: ?>
-                  <div class="block group">
+                  <div class="flex flex-col flex-1 min-h-0 group">
                   <?php endif; ?>
 
-                  <div class="flex overflow-hidden flex-col h-full bg-white transition-all duration-300 rounded-10 shadow-custom">
+                  <div class="flex overflow-hidden flex-col flex-1 min-h-0 bg-white transition-all duration-300 rounded-10 shadow-custom">
 
                     <?php if ($image): ?>
                       <div class="overflow-hidden relative">
@@ -70,8 +70,8 @@ if ($success_stories): ?>
                       <?php endif; ?>
 
                       <?php if ($has_link): ?>
-                        <span class="button-tertiary">
-                          Discover more
+                        <span class="text-left button-tertiary">
+                          <?php echo $link['title']; ?>
                         </span>
                       <?php endif; ?>
                     </div>

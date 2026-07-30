@@ -4,7 +4,7 @@
 		$pillars = get_the_term_list($post->ID, 'pillar', ' ', ' / ', ' ');
 		$logo = get_field('img_casestudy_logo', $post->ID); // Featured image
 	?>
-	<div class="card card--listing" role="article">
+	<div class="card card--listing 123" role="article">
 		<?php if(get_field('fld_casestudy_text')): ?> <!-- TEMP SOLUTION UNTIL PHASE 2 -->
 			<div class="card__logo">
 				<a class="overlaylink" href="<?php the_permalink(); ?>"></a>
@@ -34,6 +34,9 @@
 					<h3 class="zeta zeta--semibold"><?php the_title(); ?></h3>
 					<?php if(has_excerpt()): echo the_excerpt(); endif; ?>
 				</div>
+				<div class="card__cta">
+					<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="btn btn--default"><?php _e('Read the case study', 'Rouge'); ?></a>
+				</div>
 			</div>
 		<?php endif; ?>
 	</div>
@@ -45,7 +48,7 @@
 		$url = get_field('fld_partner_link', $post->ID);
 	?>
 
-	<div class="card card--listing" role="article">
+	<div class="card card--listing 456" role="article">
 		<div class="card__logo">
 			<?php if ($url): echo "<a href=\"" . $url['url'] . "\" target=\"" . $url['target'] . "\" class=\"overlaylink\"></a>"; endif; ?>
 			<?php if ($logo): ?>
@@ -68,7 +71,7 @@
 	<?php 
 		$types = get_the_terms($post->ID, 'type');
 	?>
-	<div class="card card--listing" role="article">
+	<div class="card card--listing 789" role="article">
 		<div class="card__image">
 			<?php if (has_post_thumbnail()): ?>
 				<a class="overlaylink" href="<?php the_permalink(); ?>"></a>

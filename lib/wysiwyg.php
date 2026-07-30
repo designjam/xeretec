@@ -82,6 +82,25 @@ function addgeneralbutton_register_mce_button( $buttons ) {
 
 // Optional config for tinymce
 
+/**
+ * Add underline button to TinyMCE toolbar (ACF Full toolbar + post editor).
+ */
+function wysiwyg_add_underline_button( $buttons ) {
+    if ( in_array( 'underline', $buttons, true ) ) {
+        return $buttons;
+    }
+
+    $pos = array_search( 'italic', $buttons, true );
+    if ( $pos !== false ) {
+        array_splice( $buttons, $pos + 1, 0, 'underline' );
+    } else {
+        $buttons[] = 'underline';
+    }
+
+    return $buttons;
+}
+add_filter( 'mce_buttons', 'wysiwyg_add_underline_button' );
+
 // function remove_default_format_select( $buttons ) {
 //     //Remove the format dropdown select and text color selector
 //     $remove = array( 'formatselect' );
@@ -149,6 +168,24 @@ function mce_before_init_insert_formats( $init_array ) {
           'title' => 'Bullet points with icons',
           'selector' => 'ul',
           'classes' => 'bullets',
+        ),
+
+        array(
+          'title' => 'Bullet points with dots',
+          'selector' => 'ul',
+          'classes' => 'bullet-list',
+        ),
+
+        array(
+          'title' => 'Primary Button',
+          'selector' => 'a',
+          'classes' => 'button-primary inline-button',
+        ),
+
+        array(
+          'title' => 'Secondary Button',
+          'selector' => 'a',
+          'classes' => 'button-secondary inline-button',
         ),
     );
 

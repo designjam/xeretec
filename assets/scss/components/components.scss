@@ -281,6 +281,19 @@ h2 span:first-child {
 /* Success Stories carousel specific styles */
 #success-stories {
   @apply lg:px-0;
+  /* Equal height slides: override Slick's float layout with flex */
+  .slick-track {
+    display: flex !important;
+    align-items: stretch;
+  }
+  .slick-slide {
+    height: auto !important;
+    display: flex !important;
+    > div {
+      display: flex !important;
+      width: 100%;
+    }
+  }
   /* Dots styling - Slick creates these as a sibling element */
   .slick-dots {
     display: flex !important;
@@ -413,7 +426,7 @@ h2 span:first-child {
 [id^="comparison-cards"] {
   .comparison-cards-carousel-slick {
     @media (min-width: 1024px) {
-      display: grid !important; /* Force grid on desktop */
+      display: flex !important; /* Force grid on desktop */
     }
     
     .slick-list {

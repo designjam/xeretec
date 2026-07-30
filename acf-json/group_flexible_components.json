@@ -81,6 +81,38 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_69cd1aed483b9": {
+                    "key": "layout_69cd1aed483b9",
+                    "name": "full_width",
+                    "label": "Full Width",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_69cd1aed483bb",
+                            "label": "",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_component_full_width"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_service_cards": {
                     "key": "layout_service_cards",
                     "name": "repeatable_cards",
@@ -721,6 +753,59 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_699dd8a28ed8b": {
+                    "key": "layout_699dd8a28ed8b",
+                    "name": "logo_carousel",
+                    "label": "Logo Carousel",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_699dd9288ed8f",
+                            "label": "Content",
+                            "name": "content",
+                            "aria-label": "",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "allow_in_bindings": 0,
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        },
+                        {
+                            "key": "field_699dd8e58ed8e",
+                            "label": "Logo Carousel",
+                            "name": "logo_carousel",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_partner_carousel_items"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_692704e8893ff": {
                     "key": "layout_692704e8893ff",
                     "name": "global_components",
@@ -778,6 +863,13 @@
                 "operator": "==",
                 "value": "template-components.php"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "case_studies"
+            }
         ]
     ],
     "menu_order": 0,
@@ -792,5 +884,5 @@
     "description": "Flexible content components for building page layouts",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1769160017
+    "modified": 1775049481
 }

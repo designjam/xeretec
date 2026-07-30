@@ -13,7 +13,7 @@
         elseif ($args['type'] == 'small'):
             echo "<section class=\"module-hero module-hero--small\" role=\"banner\">";
         else:
-            echo "<section class=\"module-hero module-hero--default\" role=\"banner\">";
+            echo "<section class=\"module-hero module-hero--small\" role=\"banner\">";
         endif;
             echo get_template_part('templates/modules/blocks/block', 'hero', $args);
             echo "</section>";

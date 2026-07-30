@@ -5,7 +5,7 @@
     $logodark = get_field('fld_theme_logo_dark', 'option');
 ?>
 
-<header class="site-header<?php if (is_404() || is_search() || is_page_template('template-default-tv.php') || is_page_template('template-career.php') || is_page_template('sitemap.php')): echo " site-header--dark"; endif; ?>">
+<header class="site-header">
     <div id="skiplink-container">
         <div class="container">
             <a href="#content" class="skiplink">Skip to main content</a>
@@ -18,11 +18,7 @@
 
                     <a class="navbar-brand" name="Link to the homepage" href="<?= esc_url(home_url('/')); ?>">
                         <span class="visually-hidden"><?php _e('Link to the homepage', 'Rouge'); ?></span>
-                        <?php if (is_404() || is_search() || is_page_template('template-default-tv.php') || is_page_template('template-career.php') || is_page_template('sitemap.php')):?>
-                            <img src="<?php echo $logodark['url']; ?>" alt="<?php echo $logodark['alt']; ?>" class="logo" />
-                        <?php else: ?>
-                            <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" class="logo" />
-                        <?php endif; ?>
+                        <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" class="logo" />
                     </a>
 
                     <div class="collapse navbar-collapse justify-content-center" id="primary-navigation">

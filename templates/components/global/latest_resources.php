@@ -37,7 +37,7 @@
               $featured_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
               $categories = get_the_terms(get_the_ID(), 'type');
               $category_name = !empty($categories) && !is_wp_error($categories) ? $categories[0]->name : '';
-              $excerpt = get_field('fld_insight_excerpt');
+              $excerpt = get_field('fld_insight_excerpt') ?: get_field('flexible_components_excerpt');
               $is_first = $post_index === 1;
             ?>
               <div class="latest-resource-card <?php echo $is_first ? 'lg:col-span-2' : ''; ?>">
@@ -92,7 +92,7 @@
               $featured_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
               $categories = get_the_terms(get_the_ID(), 'type');
               $category_name = !empty($categories) && !is_wp_error($categories) ? $categories[0]->name : '';
-              $excerpt = get_field('fld_insight_excerpt');
+              $excerpt = get_field('fld_insight_excerpt') ?: get_field('flexible_components_excerpt');
               $is_first_mobile = $mobile_post_index === 1;
             ?>
               <div class="p-4">

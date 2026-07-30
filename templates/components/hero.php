@@ -96,16 +96,16 @@ if ($content):
 
             <!-- Right Stats -->
             <?php if ($stats && count($stats) >= 2): ?>
-              <div class="hidden flex-col gap-8 lg:flex md:flex-row lg:gap-12">
+              <div class="hidden flex-col gap- lg:flex md:flex-row lg:gap-14">
                 <?php foreach ($stats as $index => $stat): ?>
-                  <div class="flex flex-col items-center lg:items-start max-w-[200px]">
+                  <div class="flex flex-col items-center lg:items-start max-w-[175px]">
                     <?php if ($stat['value']): ?>
                       <div class="text-[80px] font-extrabold text-red-600 mb-2 leading-none">
                         <?php echo esc_html($stat['value']); ?>
                       </div>
                     <?php endif; ?>
                     <?php if ($stat['descripion']): ?>
-                      <div class="text-white text-[23px] font-semibold ">
+                      <div class="text-white text-[23px] leading-[28px] font-semibold ">
                         <?php echo esc_html($stat['descripion']); ?>
                       </div>
                     <?php endif; ?>

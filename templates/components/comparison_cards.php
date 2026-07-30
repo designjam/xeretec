@@ -23,7 +23,7 @@ if ($comparison_cards):
             <?php endif; ?>
             
             <?php if ($comparison_cards): ?>
-                <div class="grid grid-cols-1 gap-8 comparison-cards-carousel-slick lg:grid-cols-2 xl:grid-cols-4">
+                <div class="flex gap-8 justify-center items-stretch comparison-cards-carousel-slick">
                     <?php foreach ($comparison_cards as $card): 
                         $heading = $card['heading'] ?? '';
                         $bullet_points = $card['bullet_points'] ?? [];
@@ -32,7 +32,7 @@ if ($comparison_cards):
                         $has_image = !empty($image);
                         $has_link = !empty($link) && !empty($link['url']);
                     ?>
-                        <div class="transition-all duration-300 hover:lg:-translate-y-4">
+                        <div class="w-full transition-all duration-300 lg:w-1/2 xl:w-1/4 hover:lg:-translate-y-4">
                             <div class="flex overflow-hidden flex-col h-full bg-white transition-all duration-300 comparison-card rounded-20 shadow-custom group hover:shadow-xl">
                                 
                                 <?php if ($has_image): ?>

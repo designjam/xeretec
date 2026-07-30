@@ -1,6 +1,73 @@
 <?php
 
 /**
+ * Post Template Meta Box
+ * Allows switching between Default and Flexible Components templates (like Page Attributes)
+ */
+function post_template_meta_box() {
+   add_meta_box(
+      'post_template',
+      __( 'Post Template' ),
+      'post_template_meta_box_callback',
+      'post',
+      'side',
+      'high'
+   );
+}
+add_action('add_meta_boxes', 'post_template_meta_box');
+
+function post_template_meta_box_callback( $post ) {
+   wp_nonce_field('post_template_nonce', 'post_template_nonce');
+   $template = get_post_meta($post->ID, 'post_template', true) ?: 'default';
+   ?>
+   <p>
+      <label for="post_template"><?php _e('Template'); ?></label>
+      <select name="post_template" id="post_template" style="width:100%;">
+         <option value="default" <?php selected($template, 'default'); ?>><?php _e('Default'); ?></option>
+         <option value="template-components.php" <?php selected($template, 'template-components.php'); ?>><?php _e('Flexible Components'); ?></option>
+      </select>
+   </p>
+   <p class="description"><?php _e('Choose which template to use for this post.'); ?></p>
+   <?php
+}
+
+function post_template_save_meta( $post_id ) {
+   if ( !isset($_POST['post_template_nonce']) || !wp_verify_nonce($_POST['post_template_nonce'], 'post_template_nonce') ) {
+      return;
+   }
+   if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+      return;
+   }
+   if ( !current_user_can('edit_post', $post_id) ) {
+      return;
+   }
+   if ( isset($_POST['post_template']) && in_array($_POST['post_template'], array('default', 'template-components.php')) ) {
+      update_post_meta($post_id, 'post_template', sanitize_text_field($_POST['post_template']));
+   }
+}
+add_action('save_post_post', 'post_template_save_meta');
+
+/**
+ * Load the appropriate single template for posts based on template selection
+ */
+function post_load_template( $template ) {
+   if ( !is_singular('post') ) {
+      return $template;
+   }
+   $post_id = get_queried_object_id();
+   $selected = get_post_meta($post_id, 'post_template', true);
+   if ( $selected === 'template-components.php' ) {
+      $components_template = get_template_directory() . '/single-post-components.php';
+      if ( file_exists($components_template) ) {
+         return $components_template;
+      }
+   }
+   return $template;
+}
+add_filter('single_template', 'post_load_template');
+
+
+/**
  * Return WP Posts
  *
  *

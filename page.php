@@ -5,7 +5,7 @@
 
 <main id="content" role="main">
 
-	<section class="module-hero module-hero--default" role="banner">
+	<section class="module-hero module-hero--small" role="banner">
 		<div class="container">
 			<div class="row module-hero__row"> 
 				<div class="offset-lg-1 col-lg-11">

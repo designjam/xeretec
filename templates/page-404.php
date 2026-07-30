@@ -1,4 +1,4 @@
-<section class="module-hero module-hero--default" role="region" aria-label="404 page">
+<section class="module-hero module-hero--small" role="region" aria-label="404 page">
 	<div class="container">
 		<div class="row module-hero__row"> 
 			<div class="offset-lg-1 col-lg-11">

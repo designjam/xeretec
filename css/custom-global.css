@@ -22,6 +22,9 @@ body > *:not(.site-header) {
     overflow-x: visible !important;
     overflow-y: visible !important;
 }
+body > #mobile-menu {
+    overflow-y: auto !important;
+}
 
 /* Ensure main element doesn't prevent sticky */
 main {
@@ -916,7 +919,7 @@ a.button-contact:hover::after {
     bottom: 0;
     background: #E5E5E5;
     z-index: 9999;
-    overflow-y: auto;
+    overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -1163,6 +1166,52 @@ body.mobile-menu-open {
     .mobile-menu-toggle {
         display: none !important;
     }
+}
+
+.hubspot-one-col .hbspt-form form {
+  display: flex;
+  flex-direction: column;
+}
+.hubspot-one-col .hbspt-form form label {
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+  opacity: 1;
+}
+.hubspot-one-col .hbspt-form form input,
+.hubspot-one-col .hbspt-form form select,
+.hubspot-one-col .hbspt-form form textarea {
+  color: #000
+}
+
+.hubspot-one-col .hbspt-form .inputs-list li label {
+  display: flex;
+  gap: 15px;
+}
+.hubspot-one-col .hbspt-form .inputs-list li label input {
+  width: 15px;
+  color: #fff;
+  opacity: 1;
+}
+
+.alpha:not(.component-wrapper .alpha) span:first-child,
+.beta:not(.component-wrapper .beta) span:first-child,
+.delta:not(.component-wrapper .delta) span:first-child,
+.epsilon:not(.component-wrapper .epsilon) span:first-child,
+.gamma:not(.component-wrapper .gamma) span:first-child,
+.zeta:not(.component-wrapper .zeta) span:first-child,
+h1:not(.component-wrapper h1) span:first-child,
+h2:not(.component-wrapper h2) span:first-child,
+h3:not(.component-wrapper h3) span:first-child,
+h4:not(.component-wrapper h4) span:first-child,
+h5:not(.component-wrapper h5) span:first-child,
+h6:not(.component-wrapper h6) span:first-child {
+  color: #e51728;
+}
+
+.inline-button {
+  display: inline-flex !important;
+  margin-right: 10px;
 }
 
 /* ==========================================================================

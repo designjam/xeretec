@@ -107,11 +107,11 @@ if ($product_name):
             </div>
 
             <?php if ($features): ?>
-              <div class="p-10 mb-8 bg-white rounded-10">
+              <div class="p-10 mb-8 bg-white drop-shadow-md rounded-10">
                 <h3 class="mb-5 small-heading text-brand">Features</h3>
-                <ul class="ml-8 list-disc">
+                <ul class="relative list-none">
                   <?php foreach ($features as $feature): ?>
-                    <li class="mb-2 !text-left">
+                    <li class="list-none relative pl-7 mb-2 !text-left before:content-[''] before:block before:w-2 before:h-2 before:bg-brand before:rounded-full before:absolute before:left-0 before:top-[11px] before:-translate-y-1/2">
                       <?php echo esc_html($feature['text']); ?></span>
                     </li>
                   <?php endforeach; ?>

@@ -93,13 +93,13 @@ if ($final_video_url):
     <div class="relative w-[90%] max-w-[1200px] z-10 transform scale-90 transition-transform duration-300" data-modal-content>
       <!-- Close Button -->
       <button
-        class="absolute right-0 -top-12 z-20 p-2.5 bg-transparent border-none opacity-100 transition-opacity duration-200 cursor-pointer hover:opacity-70"
+        class="flex absolute -top-10 -right-10 z-20 justify-center items-center p-2.5 w-20 h-20 border-none opacity-100 transition-opacity duration-200 cursor-pointer bg-brand hover:opacity-70"
         data-modal-close
         aria-label="Close video modal">
         <img
           src="<?php echo get_template_directory_uri(); ?>/assets/images/close-white.svg"
           alt="Close"
-          class="w-6 h-6">
+          class="w-8 h-8">
       </button>
 
       <!-- Video Player Container -->

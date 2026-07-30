@@ -82,12 +82,28 @@ add_action('wp_enqueue_scripts', 'add_team_css');
 
 /**
  * Component assets (Tailwind CSS and JavaScript)
- * Only loads on pages using template-components.php
+ * Loads on pages using template-components.php OR case studies/posts with Flexible Components template
  * Conditionally loads component-specific JS based on what's used
  * Handles both regular components and nested global_components
  */
 function enqueue_component_assets() {
-    if( !is_page_template('template-components.php')){
+    $load_components = false;
+    
+    if ( is_page_template('template-components.php') ) {
+        $load_components = true;
+    } elseif ( is_singular('case_studies') ) {
+        $post_id = get_queried_object_id();
+        if ( get_post_meta($post_id, 'case_study_template', true) === 'template-components.php' ) {
+            $load_components = true;
+        }
+    } elseif ( is_singular('post') ) {
+        $post_id = get_queried_object_id();
+        if ( get_post_meta($post_id, 'post_template', true) === 'template-components.php' ) {
+            $load_components = true;
+        }
+    }
+    
+    if ( !$load_components ) {
         return;
     }
     
@@ -303,25 +319,6 @@ function add_hotjar() { ?>
 <?php }
 //add_action('wp_footer', 'add_hotjar');
 
-/**
- * Tawk
- */
-function add_tawk() { ?>
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript" id="tawk" defer>
-      var $_Tawk_API = {}, $_Tawk_LoadStart = new Date();
-      (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = "https://embed.tawk.to/5b99314cc666d426648ab309/default";
-        s1.charset = "UTF-8";
-        s1.setAttribute("crossorigin", "*");
-        s0.parentNode.insertBefore(s1, s0);
-      })();
-    </script>
-    <!--End of Tawk.to Script-->
-<?php }
-add_action('wp_footer', 'add_tawk');
 
 function dequeue_unwanted_styles() {
     // Check if the formidable plugin's stylesheet is enqueued
