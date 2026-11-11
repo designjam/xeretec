@@ -36,6 +36,29 @@ Theme Git history (author Jason Salmon / designjam.co.uk) runs from December 202
 
 Deploy these theme files to staging/live if that environment does not yet include the comparison cards script mapping.
 
+### Landscape sister site ([landscape.uk.com](https://landscape.uk.com/))
+
+Landscape is a Xeretec Group brand site that reuses the **same WordPress theme** (`rouge-wp-start-theme`). There is **no separate Landscape repository**, theme fork, or brand-switcher in code.
+
+The Landscape request came **late**, after the initial Xeretec components setup. The quickest way to deliver a differently branded look was to edit that site’s theme file `css/custom-global.css` directly on the Landscape environment (rather than building a second theme or a domain-based style system).
+
+**How Landscape is styled differently**
+
+Live Landscape `custom-global.css` is mostly the same as the Xeretec/theme-repo file, with **extra colour overrides** near the end of the file. Notable differences vs the GitHub / local Xeretec copy:
+
+| Area | Landscape | Xeretec (this repo) |
+|---|---|---|
+| Primary / label gradients (`.button-primary`, `.label-heading`, `.bg-linear-gradient`) | Blue-purple ramp: `#1b1449` → `#2e4ea0` → `#3f479c` → `#6058a6` | Xeretec purple/red branding (no this override block) |
+| Homepage hero overlay (`.gradient-purple-blue:before`) | `#1e1b38` → `#5a369a` → `#2f9ac2` | Not present |
+| Heading accent (`h1–h6 span:first-child`, etc.) | `#2f9ac2` | `#e51728` (and scoped away from `.component-wrapper`) |
+| Dark-background primary buttons | Extra white-button rules under `.bg-dark` | Not present |
+
+**Implications for handover**
+
+- Landscape branding lives on the **Landscape site’s own** `custom-global.css` (and CMS content/logo), not in `https://github.com/designjam/xeretec`.
+- Updating this GitHub theme and deploying only to Xeretec will **not** automatically update Landscape colours.
+- If Landscape and Xeretec ever share a single theme deploy path, take care not to overwrite Landscape’s colour overrides (or extract them into a clear Landscape-only CSS partial first).
+
 ### Build tooling (Designjam Tailwind layer)
 
 Build tooling lives under the theme’s **`.npm/`** folder. That entire folder is **gitignored** (`.gitignore` contains only `.npm/`), so it exists locally and must be included in any file handover even though it is not on GitHub.
@@ -204,6 +227,7 @@ Also: `group_693e82d7868bf.json` (Vertical Carousel), `group_6941712fd873b.json`
 9. **Licensed plugins on this local copy** (client/host must own licences): ACF Pro, Formidable Pro (+ HubSpot/Salesforce/API add-ons), Search Filter Pro, Folders Pro, WP Migrate DB Pro, Yoast, etc.
 10. **No Composer** for the theme; PHP plugins ship with their own vendor trees where applicable.
 11. **`.npm/` not in Git** — anyone cloning only `designjam/xeretec` will get compiled `css/components.css` and source SCSS/PHP, but **not** `package.json` / lockfile / BrowserSync helper unless those are supplied separately.
+12. **Landscape.uk.com colours** — brand overrides exist only on the Landscape install’s `custom-global.css`; they are not in this repo (late request; see Landscape section above).
 
 ### Files that exist locally but are probably not on live/staging (or not needed there)
 
@@ -274,4 +298,5 @@ Dozens of `acf-json/group_626*.json` (and similar hex IDs from ~2022) for the or
 | Component fields | `acf-json/group_component_*.json` + `group_flexible_components.json` |
 | Global shared blocks | ACF Options / Global Components + `templates/components/global/` |
 | Site-wide CSS overrides (HubSpot, header, mobile menu) | `css/custom-global.css` |
+| Landscape brand colours | Landscape site only — overrides in that install’s `css/custom-global.css` (no separate repo) |
 | Original theme CSS | `css/global-styles.min.css` (Gulp; inherited) |
