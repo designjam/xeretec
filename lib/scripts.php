@@ -154,6 +154,7 @@ function enqueue_component_assets() {
         'product_detail' => 'product-detail',
         'product_feature_carousel' => 'carousel',
         'recommended_products' => 'carousel',
+        'comparison_cards' => 'carousel',
         'vertical_tabs' => 'vertical-tabs',
         'vertical_carousel' => 'vertical-carousel',
         'application_cards' => 'application-cards',

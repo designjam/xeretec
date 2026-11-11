@@ -32,7 +32,7 @@ if ($comparison_cards):
                         $has_image = !empty($image);
                         $has_link = !empty($link) && !empty($link['url']);
                     ?>
-                        <div class="w-full transition-all duration-300 lg:w-1/2 xl:w-1/4 hover:lg:-translate-y-4">
+                        <div class="py-4 w-full transition-all duration-300 lg:py-0 lg:w-1/2 xl:w-1/4 hover:lg:-translate-y-4">
                             <div class="flex overflow-hidden flex-col h-full bg-white transition-all duration-300 comparison-card rounded-20 shadow-custom group hover:shadow-xl">
                                 
                                 <?php if ($has_image): ?>
